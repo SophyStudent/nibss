@@ -8,7 +8,7 @@ const { validateRegistration } = require("../validators/auth.validator");
 const router = express.Router();
 
 // POST /register → register a new customer
-router.post("/register", validateRegistration, registerCustomer);
+router.post("/register", validateRegistration, registerCustomer); //validateRegistration middleware added for input validation
 
 // POST /login → authenticate an existing customer
 router.post("/login", loginCustomer);
