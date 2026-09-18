@@ -8,6 +8,17 @@ const registerCustomer = async ({ name, email, password }) => {
     };
 };
 
+const loginCustomer = async ({ email, password }) => {
+    // Login business logic will go here.
+    // Password verification and JWT generation will be added later.
+
+    return {
+        message: "Login service reached",
+        email
+    };
+};
+
 module.exports = {
-    registerCustomer
+    registerCustomer,
+    loginCustomer
 };
