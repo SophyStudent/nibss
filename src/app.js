@@ -1,6 +1,7 @@
 const swaggerUi = require("swagger-ui-express");
 const swaggerSpec = require("./config/swagger");
 const express = require("express");
+const customerRoutes = require("./routes/customer.routes");
 
 const authRoutes = require("./routes/auth.routes");
 // const customerRoutes = require("./routes/customer.routes");
@@ -22,8 +23,7 @@ app.get("/api-docs.json", (req, res) => {
 
 // Register our API routes
 app.use("/api/auth", authRoutes);
-
-// app.use("/api/customers", customerRoutes);
+app.use("/api/customers", customerRoutes);
 // app.use("/api/accounts", accountRoutes);
 // app.use("/api/transactions", transactionRoutes);
 // app.use("/api/kyc", kycRoutes);

@@ -1,0 +1,12 @@
+CREATE TABLE kyc (
+    id SERIAL PRIMARY KEY,
+    customer_id INTEGER UNIQUE NOT NULL,
+    bvn VARCHAR(11) UNIQUE,
+    nin VARCHAR(11) UNIQUE,
+    bvn_verified BOOLEAN DEFAULT FALSE,
+    nin_verified BOOLEAN DEFAULT FALSE,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+
+    FOREIGN KEY (customer_id) REFERENCES customers(id)
+);
