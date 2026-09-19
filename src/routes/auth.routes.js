@@ -9,6 +9,7 @@ const asyncHandler = require("../utils/asyncHandler");
 
 const router = express.Router();
 
+
 // POST /register → register a new customer
 router.post(
     "/register",
