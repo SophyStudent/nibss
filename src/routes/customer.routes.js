@@ -1,9 +1,12 @@
 const express = require("express");
-const { getCustomerProfile } = require("../controllers/customer.controller");
+const authenticate = require("../middleware/auth.middleware");
+const {
+    getCustomerProfile
+} = require("../controllers/customer.controller");
 
 const router = express.Router();
 
-// GET /me → get the logged-in customer's profile
-router.get("/me", getCustomerProfile);
+// Get the authenticated customer's profile
+router.get("/me", authenticate, getCustomerProfile);
 
 module.exports = router;
