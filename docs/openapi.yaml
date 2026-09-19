@@ -18,42 +18,26 @@ paths:
         content:
           application/json:
             schema:
-              type: object
-              required:
-                - name
-                - email
-                - password
-              properties:
-                name:
-                  type: string
-                email:
-                  type: string
-                password:
-                  type: string
+              $ref: "#/components/schemas/RegisterCustomerRequest"
       responses:
         "201":
           description: Customer registered successfully
-
   /api/auth/login:
     post:
       summary: Authenticate a customer        
       requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              type: object
-              required:
-                - email
-                - password
-              properties:
-                email:
-                  type: string
-                password:
-                  type: string
+  required: true
+  content:
+    application/json:
+      schema:
+        $ref: "#/components/schemas/LoginRequest"
       responses:
-        "200":
-          description: Customer authenticated successfully
+"200":
+  description: Login successful
+  content:
+    application/json:
+      schema:
+        $ref: "#/components/schemas/LoginResponse"
       
     /api/customers/me:
     get:
@@ -63,28 +47,24 @@ paths:
       responses:
         "200":
           description: Customer profile retrieved successfully
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/CustomerResponse"
         "401":
           description: Unauthorized
-
 
   /api/kyc/bvn:
     post:
       summary: Verify customer BVN
       security:
         - bearerAuth: []
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              type: object
-              required:
-                - bvn
-              properties:
-                bvn:
-                  type: string
-                  description: Customer's 11-digit BVN
-                  example: "12345678901"
+    requestBody:
+      required: true
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/VerifyBvnRequest"
       responses:
         "200":
           description: BVN verified successfully
@@ -273,3 +253,68 @@ components:
       type: http
       scheme: bearer
       bearerFormat: JWT
+
+  schemas:
+    RegisterCustomerRequest:
+      type: object
+      required:
+        - name
+        - email
+        - password
+      properties:
+        name:
+          type: string
+        email:
+          type: string
+          format: email
+        password:
+          type: string
+          format: password    
+
+    LoginRequest:
+      type: object
+      required:
+        - email
+        - password
+      properties:
+        email:
+          type: string
+          format: email
+        password:
+          type: string
+          format: password    
+
+    LoginResponse:
+      type: object
+      properties:
+        message:
+          type: string
+        token:
+          type: string
+        customer:
+          type: object
+          properties:
+            name:
+              type: string
+            email:
+              type: string
+
+    CustomerResponse:
+      type: object
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+        email:
+          type: string
+          format: email          
+
+    VerifyBvnRequest:
+      type: object
+      required:
+        - bvn
+      properties:
+        bvn:
+          type: string
+          example: "12345678901"      
