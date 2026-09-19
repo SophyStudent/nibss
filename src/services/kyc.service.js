@@ -9,7 +9,7 @@ const {
 const verifyBvn = async (customerId, bvn) => {
     const result = await validateBvn(bvn);
 
-    if (!result.valid) {
+    if (!result.success) {
         const error = new Error("BVN verification failed");
         error.statusCode = 400;
         throw error;

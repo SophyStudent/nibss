@@ -1,12 +1,20 @@
+const {
+    verifyBvn: verifyBvnService
+} = require("../services/kyc.service");
+
 const verifyBvn = async (req, res) => {
     const { bvn } = req.body;
 
     const customerId = req.customer.customerId;
 
-    res.status(200).json({
-        message: "BVN verification request received",
+    const result = await verifyBvnService(
         customerId,
         bvn
+    );
+
+    res.status(200).json({
+        message: "BVN verified successfully",
+        result
     });
 };
 

@@ -7,7 +7,7 @@ const authRoutes = require("./routes/auth.routes");
 // const customerRoutes = require("./routes/customer.routes");
 // const accountRoutes = require("./routes/account.routes");
 // const transactionRoutes = require("./routes/transaction.routes");
-// const kycRoutes = require("./routes/kyc.routes");
+const kycRoutes = require("./routes/kyc.routes");
 
 const errorMiddleware = require("./middleware/error.middleware");
 
@@ -26,7 +26,7 @@ app.use("/api/auth", authRoutes);
 app.use("/api/customers", customerRoutes);
 // app.use("/api/accounts", accountRoutes);
 // app.use("/api/transactions", transactionRoutes);
-// app.use("/api/kyc", kycRoutes);
+app.use("/api/kyc", kycRoutes);
 
 // Central error handler
 app.use(errorMiddleware);
