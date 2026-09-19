@@ -11,6 +11,27 @@ const createKycRecord = async (customerId) => {
     return result.rows[0];
 };
 
+const saveBvnVerification = async (customerId, bvn) => {
+    const result = await pool.query(
+        `INSERT INTO kyc (
+            customer_id,
+            bvn,
+            bvn_verified
+        )
+        VALUES ($1, $2, TRUE)
+        ON CONFLICT (customer_id)
+        DO UPDATE SET
+            bvn = EXCLUDED.bvn,
+            bvn_verified = TRUE,
+            updated_at = CURRENT_TIMESTAMP
+        RETURNING id, customer_id, bvn, nin, bvn_verified, nin_verified`,
+        [customerId, bvn]
+    );
+
+    return result.rows[0];
+};
+
 module.exports = {
-    createKycRecord
+    createKycRecord,
+    saveBvnVerification
 };
