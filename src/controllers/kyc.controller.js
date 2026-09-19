@@ -1,5 +1,6 @@
 const {
-    verifyBvn: verifyBvnService
+    verifyBvn: verifyBvnService,
+    verifyNin: verifyNinService
 } = require("../services/kyc.service");
 
 const verifyBvn = async (req, res) => {
@@ -23,10 +24,14 @@ const verifyNin = async (req, res) => {
 
     const customerId = req.customer.customerId;
 
-    res.status(200).json({
-        message: "NIN verification request received",
+    const result = await verifyNinService(
         customerId,
         nin
+    );
+
+    res.status(200).json({
+        message: "NIN verified successfully",
+        result
     });
 };
 
