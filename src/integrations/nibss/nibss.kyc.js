@@ -19,6 +19,25 @@ const validateBvn = async (bvn) => {
     return response.data;
 };
 
+const validateNin = async (nin) => {
+    const token = await getNibssToken();
+
+    const response = await nibssClient.post(
+        "/api/validateNin",
+        {
+            nin
+        },
+        {
+            headers: {
+                Authorization: `Bearer ${token}`
+            }
+        }
+    );
+
+    return response.data;
+};
+
 module.exports = {
-    validateBvn
+    validateBvn,
+    validateNin
 };
