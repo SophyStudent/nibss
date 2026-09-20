@@ -53,8 +53,20 @@ const findAccountByNumberAndCustomerId = async (
     return result.rows[0];
 };
 
+const findAccountByNumber = async (accountNumber) => {
+    const result = await pool.query(
+        `SELECT id, customer_id, account_number, account_type, created_at
+         FROM accounts
+         WHERE account_number = $1`,
+        [accountNumber]
+    );
+
+    return result.rows[0];
+};
+
 module.exports = {
     createAccount,
     findAccountsByCustomerId,
-    findAccountByNumberAndCustomerId
+    findAccountByNumberAndCustomerId,
+    findAccountByNumber
 };
