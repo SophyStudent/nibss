@@ -1,6 +1,7 @@
 const {
     createAccount: createAccountService,
-    getAccounts: getAccountsService
+    getAccounts: getAccountsService,
+    getAccountByNumber: getAccountByNumberService
 } = require("../services/account.service");
 
 const createAccount = async (req, res) => {
@@ -33,7 +34,25 @@ const getAccounts = async (req, res) => {
     });
 };
 
+const getAccountByNumber = async (req, res) => {
+    const {
+        accountNumber
+    } = req.params;
+
+    const customerId = req.customer.customerId;
+
+    const account = await getAccountByNumberService(
+        accountNumber,
+        customerId
+    );
+
+    res.status(200).json({
+        account
+    });
+};
+
 module.exports = {
     createAccount,
-    getAccounts
+    getAccounts,
+    getAccountByNumber
 };

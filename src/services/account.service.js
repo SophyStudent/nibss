@@ -4,7 +4,8 @@ const {
 
 const {
     createAccount: createLocalAccount,
-    findAccountsByCustomerId
+    findAccountsByCustomerId,
+    findAccountByNumberAndCustomerId
 } = require("../models/account.model");
 
 const {
@@ -63,7 +64,26 @@ const getAccounts = async (customerId) => {
     return await findAccountsByCustomerId(customerId);
 };
 
+const getAccountByNumber = async (
+    accountNumber,
+    customerId
+) => {
+    const account = await findAccountByNumberAndCustomerId(
+        accountNumber,
+        customerId
+    );
+
+    if (!account) {
+        const error = new Error("Account not found");
+        error.statusCode = 404;
+        throw error;
+    }
+
+    return account;
+};
+
 module.exports = {
     createAccount,
-    getAccounts
+    getAccounts,
+    getAccountByNumber
 };
