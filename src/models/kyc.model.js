@@ -51,8 +51,20 @@ const saveNinVerification = async (customerId, nin) => {
     return result.rows[0];
 };
 
+const findKycByCustomerId = async (customerId) => {
+    const result = await pool.query(
+        `SELECT id, customer_id, bvn, nin, bvn_verified, nin_verified
+         FROM kyc
+         WHERE customer_id = $1`,
+        [customerId]
+    );
+
+    return result.rows[0];
+};
+
 module.exports = {
     createKycRecord,
     saveBvnVerification,
-    saveNinVerification
+    saveNinVerification,
+    findKycByCustomerId
 };
