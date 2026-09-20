@@ -105,6 +105,21 @@ paths:
         "401":
           description: Unauthorized
 
+  /api/kyc/status:
+    get:
+      summary: Get customer KYC status
+      security:
+        - bearerAuth: []
+      responses:
+        "200":
+          description: KYC status retrieved successfully
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/KycStatusResponse"
+        "401":
+          description: Unauthorized
+
   /api/accounts:
     post:
       summary: Create a customer bank account
@@ -323,21 +338,60 @@ components:
       type: object
       required:
         - bvn
+        - firstName
+        - lastName
+        - dob
+        - phone
       properties:
         bvn:
           type: string
-          description: Customer's BVN
-          example: "12345678901"
+          example: "10840712848"
+        firstName:
+          type: string
+          example: "Chisom"
+        lastName:
+          type: string
+          example: "Abraham"
+        dob:
+          type: string
+          format: date
+          example: "1990-05-15"
+        phone:
+          type: string
+          example: "08012345678"
+      example:
+        bvn: "10840712848"
+        firstName: "Chisom"
+        lastName: "Abraham"
+        dob: "1990-05-15"
+        phone: "08012345678"
 
     VerifyNinRequest:
       type: object
       required:
         - nin
+        - firstName
+        - lastName
+        - dob
       properties:
         nin:
           type: string
-          description: Customer's NIN
-          example: "12345678901"
+          example: "10840712849"
+        firstName:
+          type: string
+          example: "Chisom"
+        lastName:
+          type: string
+          example: "Abraham"
+        dob:
+          type: string
+          format: date
+          example: "1990-05-15"
+      example:
+        nin: "10840712849"
+        firstName: "Chisom"
+        lastName: "Abraham"
+        dob: "1990-05-15"
 
     KycVerificationResponse:
       type: object
@@ -349,14 +403,39 @@ components:
           type: string
           example: "verified"
 
+    KycStatusResponse:
+      type: object
+      properties:
+        status:
+          type: object
+          properties:
+            bvnVerified:
+              type: boolean
+              example: true
+            ninVerified:
+              type: boolean
+              example: false
+      example:
+        status:
+          bvnVerified: true
+          ninVerified: false
+
     CreateAccountRequest:
       type: object
       required:
         - accountType
+        - dob
       properties:
         accountType:
           type: string
           example: "savings"
+        dob:
+          type: string
+          format: date
+          example: "1990-05-15"
+      example:
+        accountType: "savings"
+        dob: "1990-05-15"
 
     AccountResponse:
       type: object

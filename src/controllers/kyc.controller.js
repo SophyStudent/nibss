@@ -1,6 +1,7 @@
 const {
     verifyBvn: verifyBvnService,
-    verifyNin: verifyNinService
+    verifyNin: verifyNinService,
+    getKycStatus: getKycStatusService
 } = require("../services/kyc.service");
 
 const verifyBvn = async (req, res) => {
@@ -53,7 +54,18 @@ const verifyNin = async (req, res) => {
     });
 };
 
+const getKycStatus = async (req, res) => {
+    const customerId = req.customer.customerId;
+
+    const status = await getKycStatusService(customerId);
+
+    res.status(200).json({
+        status
+    });
+};
+
 module.exports = {
     verifyBvn,
-    verifyNin
+    verifyNin,
+    getKycStatus
 };

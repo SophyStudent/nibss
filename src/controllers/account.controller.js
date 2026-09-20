@@ -3,12 +3,16 @@ const {
 } = require("../services/account.service");
 
 const createAccount = async (req, res) => {
-    const { dob } = req.body;
+    const {
+        accountType,
+        dob
+    } = req.body;
 
     const customerId = req.customer.customerId;
 
     const result = await createAccountService(
         customerId,
+        accountType,
         dob
     );
 

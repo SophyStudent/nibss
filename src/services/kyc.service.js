@@ -1,6 +1,7 @@
 const {
     saveBvnVerification,
-    saveNinVerification
+    saveNinVerification,
+    findKycByCustomerId
 } = require("../models/kyc.model");
 
 const {
@@ -9,6 +10,22 @@ const {
     validateBvn,
     validateNin
 } = require("../integrations/nibss/nibss.kyc");
+
+const getKycStatus = async (customerId) => {
+    const kyc = await findKycByCustomerId(customerId);
+
+    if (!kyc) {
+        return {
+            bvnVerified: false,
+            ninVerified: false
+        };
+    }
+
+    return {
+        bvnVerified: kyc.bvn_verified,
+        ninVerified: kyc.nin_verified
+    };
+};
 
 const verifyBvn = async (
     customerId,
@@ -84,7 +101,9 @@ const verifyNin = async (
     };
 };
 
+
 module.exports = {
     verifyBvn,
-    verifyNin
+    verifyNin,
+    getKycStatus
 };

@@ -10,7 +10,11 @@ const {
     createNibssAccount
 } = require("../integrations/nibss/nibss.accounts");
 
-const createAccount = async (customerId, dob) => {
+const createAccount = async (
+    customerId,
+    accountType,
+    dob
+) => {
     const kyc = await findKycByCustomerId(customerId);
 
     if (!kyc) {
@@ -44,8 +48,8 @@ const createAccount = async (customerId, dob) => {
 
     const account = await createLocalAccount(
         customerId,
-        nibssAccount.accountNumber,
-        "savings"
+        nibssAccount.account.accountNumber,
+        accountType
     );
 
     return {
