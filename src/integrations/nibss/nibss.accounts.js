@@ -40,7 +40,7 @@ const nameEnquiry = async (accountNumber) => {
     const token = await getNibssToken();
 
     const response = await nibssClient.get(
-        `/api/account/nameenquiry/${accountNumber}`,
+        `/api/account/name-enquiry/${accountNumber}`,
         {
             headers: {
                 Authorization: `Bearer ${token}`

@@ -14,7 +14,7 @@ const authRoutes = require("./routes/auth.routes");
 
 const accountRoutes = require("./routes/account.routes");
 
-// const transactionRoutes = require("./routes/transaction.routes");
+const transactionRoutes = require("./routes/transaction.routes");
 
 const kycRoutes = require("./routes/kyc.routes");
 
@@ -40,7 +40,7 @@ app.use("/api/customers", customerRoutes);
 
 app.use("/api/accounts", accountRoutes);
 
-// app.use("/api/transactions", transactionRoutes);
+app.use("/api/transactions", transactionRoutes);
 
 app.use("/api/kyc", kycRoutes);
 
