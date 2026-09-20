@@ -4,11 +4,30 @@ const {
 } = require("../models/kyc.model");
 
 const {
+    registerBvn,
+    registerNin,
     validateBvn,
     validateNin
 } = require("../integrations/nibss/nibss.kyc");
 
-const verifyBvn = async (customerId, bvn) => {
+const verifyBvn = async (
+    customerId,
+    bvn,
+    firstName,
+    lastName,
+    dob,
+    phone
+) => {
+    // Register the BVN in the simulated NIBSS identity store
+    await registerBvn(
+        bvn,
+        firstName,
+        lastName,
+        dob,
+        phone
+    );
+
+    // Then verify the BVN
     const result = await validateBvn(bvn);
 
     if (!result.success) {
@@ -17,6 +36,7 @@ const verifyBvn = async (customerId, bvn) => {
         throw error;
     }
 
+    // Save the successful verification in our own database
     const kycRecord = await saveBvnVerification(
         customerId,
         bvn
@@ -28,7 +48,22 @@ const verifyBvn = async (customerId, bvn) => {
     };
 };
 
-const verifyNin = async (customerId, nin) => {
+const verifyNin = async (
+    customerId,
+    nin,
+    firstName,
+    lastName,
+    dob
+) => {
+    // Register the NIN in the simulated NIBSS identity store
+    await registerNin(
+        nin,
+        firstName,
+        lastName,
+        dob
+    );
+
+    // Then verify the NIN
     const result = await validateNin(nin);
 
     if (!result.response) {
@@ -37,6 +72,7 @@ const verifyNin = async (customerId, nin) => {
         throw error;
     }
 
+    // Save the successful verification in our own database
     const kycRecord = await saveNinVerification(
         customerId,
         nin

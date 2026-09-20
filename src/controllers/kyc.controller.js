@@ -4,13 +4,23 @@ const {
 } = require("../services/kyc.service");
 
 const verifyBvn = async (req, res) => {
-    const { bvn } = req.body;
+    const {
+        bvn,
+        firstName,
+        lastName,
+        dob,
+        phone
+    } = req.body;
 
     const customerId = req.customer.customerId;
 
     const result = await verifyBvnService(
         customerId,
-        bvn
+        bvn,
+        firstName,
+        lastName,
+        dob,
+        phone
     );
 
     res.status(200).json({
@@ -20,13 +30,21 @@ const verifyBvn = async (req, res) => {
 };
 
 const verifyNin = async (req, res) => {
-    const { nin } = req.body;
+    const {
+        nin,
+        firstName,
+        lastName,
+        dob
+    } = req.body;
 
     const customerId = req.customer.customerId;
 
     const result = await verifyNinService(
         customerId,
-        nin
+        nin,
+        firstName,
+        lastName,
+        dob
     );
 
     res.status(200).json({
