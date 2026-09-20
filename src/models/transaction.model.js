@@ -57,7 +57,35 @@ const findTransactionsByCustomerId = async (customerId) => {
     return result.rows;
 };
 
+const findTransactionByIdAndCustomerId = async (
+    transactionId,
+    customerId
+) => {
+    const result = await pool.query(
+        `SELECT
+            t.id,
+            t.transaction_id,
+            t.from_account_id,
+            t.to_account_number,
+            t.amount,
+            t.status,
+            t.created_at
+         FROM transactions t
+         INNER JOIN accounts a
+            ON t.from_account_id = a.id
+         WHERE t.transaction_id = $1
+         AND a.customer_id = $2`,
+        [
+            transactionId,
+            customerId
+        ]
+    );
+
+    return result.rows[0];
+};
+
 module.exports = {
     createTransaction,
-    findTransactionsByCustomerId
+    findTransactionsByCustomerId,
+    findTransactionByIdAndCustomerId
 };

@@ -22,7 +22,8 @@ const {
 
 const {
     createTransaction,
-    findTransactionsByCustomerId
+    findTransactionsByCustomerId,
+    findTransactionByIdAndCustomerId
 } = require("../models/transaction.model");
 
 const transferMoney = async (
@@ -115,7 +116,26 @@ const getTransactionHistory = async (customerId) => {
     );
 };
 
+const getTransaction = async (
+    transactionId,
+    customerId
+) => {
+    const transaction = await findTransactionByIdAndCustomerId(
+        transactionId,
+        customerId
+    );
+
+    if (!transaction) {
+        const error = new Error("Transaction not found");
+        error.statusCode = 404;
+        throw error;
+    }
+
+    return transaction;
+};
+
 module.exports = {
     transferMoney,
-    getTransactionHistory
+    getTransactionHistory,
+    getTransaction
 };

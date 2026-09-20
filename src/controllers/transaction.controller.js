@@ -1,6 +1,7 @@
 const {
     transferMoney,
-    getTransactionHistory
+    getTransactionHistory,
+    getTransaction
 } = require("../services/transaction.service");
 
 const transfer = async (req, res) => {
@@ -40,7 +41,28 @@ const getTransactionHistoryController = async (
     });
 };
 
+const getTransactionController = async (
+    req,
+    res
+) => {
+    const {
+        transactionId
+    } = req.params;
+
+    const customerId = req.customer.customerId;
+
+    const transaction = await getTransaction(
+        transactionId,
+        customerId
+    );
+
+    res.status(200).json({
+        transaction
+    });
+};
+
 module.exports = {
     transfer,
-    getTransactionHistory: getTransactionHistoryController
+    getTransactionHistory: getTransactionHistoryController,
+    getTransaction: getTransactionController
 };

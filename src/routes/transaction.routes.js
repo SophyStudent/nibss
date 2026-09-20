@@ -3,7 +3,8 @@ const authenticate = require("../middleware/auth.middleware");
 
 const {
     transfer,
-    getTransactionHistory
+    getTransactionHistory,
+    getTransaction
 } = require("../controllers/transaction.controller");
 
 const router = express.Router();
@@ -13,6 +14,13 @@ router.get(
     "/",
     authenticate,
     getTransactionHistory
+);
+
+// Get a specific transaction
+router.get(
+    "/:transactionId",
+    authenticate,
+    getTransaction
 );
 
 // Initiate a money transfer
