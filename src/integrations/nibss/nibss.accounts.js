@@ -21,6 +21,22 @@ const createNibssAccount = async (kycType, kycID, dob) => {
     return response.data;
 };
 
+const getNibssAccountBalance = async (accountNumber) => {
+    const token = await getNibssToken();
+
+    const response = await nibssClient.get(
+        `/api/account/balance/${accountNumber}`,
+        {
+            headers: {
+                Authorization: `Bearer ${token}`
+            }
+        }
+    );
+
+    return response.data;
+};
+
 module.exports = {
-    createNibssAccount
+    createNibssAccount,
+    getNibssAccountBalance
 };

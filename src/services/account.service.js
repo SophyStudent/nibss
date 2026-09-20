@@ -9,8 +9,10 @@ const {
 } = require("../models/account.model");
 
 const {
-    createNibssAccount
+    createNibssAccount,
+    getNibssAccountBalance
 } = require("../integrations/nibss/nibss.accounts");
+
 
 const createAccount = async (
     customerId,
@@ -82,8 +84,31 @@ const getAccountByNumber = async (
     return account;
 };
 
+const getAccountBalance = async (
+    accountNumber,
+    customerId
+) => {
+    const account = await findAccountByNumberAndCustomerId(
+        accountNumber,
+        customerId
+    );
+
+    if (!account) {
+        const error = new Error("Account not found");
+        error.statusCode = 404;
+        throw error;
+    }
+
+    const balance = await getNibssAccountBalance(
+        accountNumber
+    );
+
+    return balance;
+};
+
 module.exports = {
     createAccount,
     getAccounts,
-    getAccountByNumber
+    getAccountByNumber,
+    getAccountBalance
 };

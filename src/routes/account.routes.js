@@ -4,7 +4,8 @@ const authenticate = require("../middleware/auth.middleware");
 const {
     createAccount,
     getAccounts,
-    getAccountByNumber
+    getAccountByNumber,
+    getAccountBalance
 } = require("../controllers/account.controller");
 
 const router = express.Router();
@@ -17,6 +18,12 @@ router.get(
     "/:accountNumber",
     authenticate,
     getAccountByNumber
+);
+
+router.get(
+    "/:accountNumber/balance",
+    authenticate,
+    getAccountBalance
 );
 
 module.exports = router;

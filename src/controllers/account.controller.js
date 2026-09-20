@@ -1,8 +1,9 @@
 const {
     createAccount: createAccountService,
     getAccounts: getAccountsService,
-    getAccountByNumber: getAccountByNumberService
-} = require("../services/account.service");
+    getAccountByNumber: getAccountByNumberService,
+    getAccountBalance: getAccountBalanceService
+} = require("../services/account.service")
 
 const createAccount = async (req, res) => {
     const {
@@ -51,8 +52,26 @@ const getAccountByNumber = async (req, res) => {
     });
 };
 
+const getAccountBalance = async (req, res) => {
+    const {
+        accountNumber
+    } = req.params;
+
+    const customerId = req.customer.customerId;
+
+    const balance = await getAccountBalanceService(
+        accountNumber,
+        customerId
+    );
+
+    res.status(200).json({
+        balance
+    });
+};
+
 module.exports = {
     createAccount,
     getAccounts,
-    getAccountByNumber
+    getAccountByNumber,
+    getAccountBalance
 };
