@@ -21,7 +21,8 @@ const {
 } = require("../integrations/nibss/nibss.transfers");
 
 const {
-    createTransaction
+    createTransaction,
+    findTransactionsByCustomerId
 } = require("../models/transaction.model");
 
 const transferMoney = async (
@@ -108,6 +109,13 @@ return {
 
 };
 
+const getTransactionHistory = async (customerId) => {
+    return await findTransactionsByCustomerId(
+        customerId
+    );
+};
+
 module.exports = {
-    transferMoney
+    transferMoney,
+    getTransactionHistory
 };
