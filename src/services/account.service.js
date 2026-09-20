@@ -3,7 +3,8 @@ const {
 } = require("../models/kyc.model");
 
 const {
-    createAccount: createLocalAccount
+    createAccount: createLocalAccount,
+    findAccountsByCustomerId
 } = require("../models/account.model");
 
 const {
@@ -58,6 +59,11 @@ const createAccount = async (
     };
 };
 
+const getAccounts = async (customerId) => {
+    return await findAccountsByCustomerId(customerId);
+};
+
 module.exports = {
-    createAccount
+    createAccount,
+    getAccounts
 };
