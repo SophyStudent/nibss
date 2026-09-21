@@ -2,6 +2,8 @@ const express = require("express");
 
 const authenticate = require("../middleware/auth.middleware");
 
+const asyncHandler = require("../utils/asyncHandler");
+
 const {
     validateCreateAccount,
     validateAccountNumber
@@ -20,27 +22,27 @@ router.post(
     "/",
     authenticate,
     validateCreateAccount,
-    createAccount
+    asyncHandler(createAccount)
 );
 
 router.get(
     "/",
     authenticate,
-    getAccounts
+    asyncHandler(getAccounts)
 );
 
 router.get(
     "/:accountNumber",
     authenticate,
     validateAccountNumber,
-    getAccountByNumber
+    asyncHandler(getAccountByNumber)
 );
 
 router.get(
     "/:accountNumber/balance",
     authenticate,
     validateAccountNumber,
-    getAccountBalance
+    asyncHandler(getAccountBalance)
 );
 
 module.exports = router;

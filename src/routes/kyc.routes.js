@@ -1,5 +1,6 @@
 const express = require("express");
 const authenticate = require("../middleware/auth.middleware");
+const asyncHandler = require("../utils/asyncHandler");
 const {
     validateBvn,
     validateNin
@@ -18,7 +19,7 @@ router.post(
     "/bvn",
     authenticate,
     validateBvn,
-    verifyBvn
+    asyncHandler(verifyBvn)
 );
 
 // Submit NIN for verification
@@ -26,10 +27,10 @@ router.post(
     "/nin",
     authenticate,
     validateNin,
-    verifyNin
+    asyncHandler(verifyNin)
 );
 
 // Get the authenticated customer's KYC status
-router.get("/status", authenticate, getKycStatus);
+router.get("/status", authenticate, asyncHandler(getKycStatus));
 
 module.exports = router;

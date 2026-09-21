@@ -1,5 +1,6 @@
 const express = require("express");
 const authenticate = require("../middleware/auth.middleware");
+const asyncHandler = require("../utils/asyncHandler");
 const {
     validateTransfer
 } = require("../validators/transaction.validator");
@@ -17,14 +18,14 @@ const router = express.Router();
 router.get(
     "/",
     authenticate,
-    getTransactionHistory
+    asyncHandler(getTransactionHistory)
 );
 
 // Get a specific transaction
 router.get(
     "/:transactionId",
     authenticate,
-    getTransaction
+    asyncHandler(getTransaction)
 );
 
 // Initiate a money transfer
@@ -32,7 +33,7 @@ router.post(
     "/transfer",
     authenticate,
     validateTransfer,
-    transfer
+    asyncHandler(transfer)
 );
 
 module.exports = router;
