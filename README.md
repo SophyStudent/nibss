@@ -2,6 +2,10 @@
 
 # Using NibssByPhoenix Banking API
 
+Backend + Swagger: https://nibss-a2rm.vercel.app/api-docs/
+
+Frontend: https://nibss-frontend.vercel.app/
+
 A backend banking application built with **Node.js, Express, PostgreSQL, JWT authentication, and the NibssByPhoenix external API**.
 
 The project simulates the backend of a digital banking system. It provides customer authentication, KYC verification, bank account creation, account balance retrieval, money transfers, and transaction management.
