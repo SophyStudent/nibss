@@ -1,6 +1,6 @@
 # CSREVOLUS DIGITAL BANKING SYSTEM
 
-# NibssByPhoenix Banking API
+# Using NibssByPhoenix Banking API
 
 A backend banking application built with **Node.js, Express, PostgreSQL, JWT authentication, and the NibssByPhoenix external API**.
 
