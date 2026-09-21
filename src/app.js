@@ -28,12 +28,8 @@ app.use(express.json());
 
 app.use(
     "/api-docs",
-    swaggerUi.serve,
-    swaggerUi.setup(null, {
-        swaggerOptions: {
-            url: "/api-docs.json"
-        }
-    })
+    swaggerUi.serveFiles(swaggerSpec),
+    swaggerUi.setup(swaggerSpec)
 );
 
 app.get("/api-docs.json", (req, res) => {
