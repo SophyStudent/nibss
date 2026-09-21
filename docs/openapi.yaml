@@ -6,6 +6,8 @@ info:
   description: NIBSS fintech banking API
 
 servers:
+  - url: https://nibss-a2rm.vercel.app
+    description: Production server (Vercel)
   - url: http://localhost:3000
     description: Local development server
 
