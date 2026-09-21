@@ -438,6 +438,12 @@ components:
         - kycID
         - dob
       properties:
+        accountType:
+          type: string
+          enum:
+            - savings
+            - current
+          example: "savings"
         kycType:
           type: string
           enum:
