@@ -122,7 +122,7 @@ This separation keeps each part of the application responsible for one major job
 # 3. Project Structure
 
 ```text
-nibss-api/
+Nibss-Project/
 │
 ├── package.json
 ├── package-lock.json
