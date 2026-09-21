@@ -1130,7 +1130,11 @@ body {
     text-decoration: underline;
 }
 
-/* Responsive */
+/* ==========================================================================
+   RESPONSIVE DESIGN
+   ========================================================================== */
+
+/* --- Tablet (max-width: 900px) --- */
 @media (max-width: 900px) {
     .bofa-grid-2,
     .bofa-grid-3 {
@@ -1142,14 +1146,329 @@ body {
         align-items: flex-start;
         gap: 24px;
     }
+
+    .bofa-hero-banner {
+        padding: 28px 24px;
+    }
+
+    .bofa-hero-actions {
+        width: 100%;
+    }
+
+    .bofa-hero-actions .bofa-btn {
+        flex: 1;
+        justify-content: center;
+    }
+
+    .bofa-card-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 12px;
+    }
+
+    .csr-footer-top {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .csr-footer-bottom {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .bofa-receipt-body {
+        padding: 20px;
+    }
+
+    .bofa-receipt-header {
+        padding: 20px;
+    }
+
+    .bofa-receipt-footer {
+        padding: 16px 20px;
+        flex-direction: column;
+    }
+
+    .bofa-receipt-footer .bofa-btn {
+        width: 100%;
+        justify-content: center;
+    }
 }
 
+/* --- Mobile (max-width: 600px) --- */
 @media (max-width: 600px) {
-    .bofa-security-bar,
-    .bofa-header-top {
-        padding: 12px 18px;
+    /* Security bar: stack vertically or hide non-essential items */
+    .bofa-security-bar {
+        flex-direction: column;
+        gap: 6px;
+        padding: 8px 14px;
+        text-align: center;
     }
+
+    .bofa-security-items {
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 8px;
+    }
+
+    .bofa-security-actions {
+        justify-content: center;
+        gap: 12px;
+    }
+
+    /* Header */
+    .bofa-header {
+        padding: 0 14px;
+    }
+
+    .bofa-header-top {
+        padding: 14px 0 10px;
+        gap: 12px;
+    }
+
+    .bofa-brand {
+        gap: 10px;
+    }
+
+    .bofa-brand-title {
+        font-size: 1.1rem;
+    }
+
+    .bofa-brand-subtitle {
+        font-size: 0.6rem;
+        letter-spacing: 0.1em;
+    }
+
+    .csr-badge-tag {
+        font-size: 0.55rem;
+        padding: 1px 4px;
+    }
+
+    .csr-logo-emblem {
+        width: 32px;
+        height: 32px;
+    }
+
+    .csr-logo-emblem svg {
+        width: 18px;
+        height: 18px;
+    }
+
+    /* User area */
+    .bofa-header-user {
+        gap: 10px;
+    }
+
+    .bofa-user-badge {
+        display: none;
+    }
+
+    .bofa-btn-signout {
+        padding: 6px 12px;
+        font-size: 0.75rem;
+    }
+
+    /* Navigation: scrollable horizontal tabs */
+    .bofa-nav-bar {
+        gap: 2px;
+        padding: 2px 0 0;
+        -webkit-overflow-scrolling: touch;
+        scrollbar-width: none;
+    }
+
+    .bofa-nav-bar::-webkit-scrollbar {
+        display: none;
+    }
+
+    .bofa-nav-item {
+        padding: 9px 12px;
+        font-size: 0.76rem;
+        gap: 5px;
+    }
+
+    .bofa-nav-item svg {
+        width: 14px;
+        height: 14px;
+    }
+
+    /* Main content */
     .bofa-main {
-        padding: 20px 14px 60px;
+        padding: 16px 12px 60px;
+    }
+
+    /* Hero banner */
+    .bofa-hero-banner {
+        padding: 22px 18px;
+        border-radius: 12px;
+        margin-bottom: 20px;
+    }
+
+    .bofa-hero-heading {
+        font-size: 1.35rem;
+    }
+
+    .bofa-total-amount {
+        font-size: 2rem;
+    }
+
+    .bofa-currency {
+        font-size: 1.3rem;
+    }
+
+    .bofa-hero-actions {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .bofa-hero-actions .bofa-btn {
+        width: 100%;
+        justify-content: center;
+    }
+
+    /* Digital bank card */
+    .bofa-card-wrapper {
+        max-width: 100%;
+    }
+
+    .bofa-digital-card {
+        padding: 20px;
+        height: auto;
+        min-height: 200px;
+    }
+
+    .bofa-card-number {
+        font-size: 1rem;
+        letter-spacing: 0.12em;
+    }
+
+    .bofa-card-holder-name,
+    .bofa-card-expiry {
+        font-size: 0.78rem;
+    }
+
+    /* Cards & panels */
+    .bofa-card {
+        margin-bottom: 16px;
+        border-radius: 10px;
+    }
+
+    .bofa-card-header {
+        padding: 16px 18px;
+    }
+
+    .bofa-card-title {
+        font-size: 0.95rem;
+    }
+
+    .bofa-card-body {
+        padding: 18px;
+    }
+
+    /* Buttons */
+    .bofa-btn {
+        padding: 10px 16px;
+        font-size: 0.82rem;
+    }
+
+    .bofa-btn-sm {
+        padding: 6px 12px;
+        font-size: 0.76rem;
+    }
+
+    /* Tables */
+    .bofa-table th {
+        padding: 10px 12px;
+        font-size: 0.68rem;
+    }
+
+    .bofa-table td {
+        padding: 12px;
+        font-size: 0.82rem;
+    }
+
+    /* Receipt modal */
+    .bofa-modal-overlay {
+        padding: 12px;
+        align-items: flex-end;
+    }
+
+    .bofa-receipt-paper {
+        max-width: 100%;
+        border-radius: 14px 14px 0 0;
+        max-height: 90vh;
+        overflow-y: auto;
+    }
+
+    .bofa-receipt-amount {
+        font-size: 1.5rem;
+    }
+
+    .bofa-receipt-row {
+        font-size: 0.8rem;
+    }
+
+    /* Toast notifications */
+    .bofa-toast-container {
+        left: 12px;
+        right: 12px;
+        bottom: 16px;
+        max-width: none;
+    }
+
+    .bofa-toast {
+        font-size: 0.82rem;
+    }
+
+    /* Footer */
+    .csr-footer {
+        padding: 24px 14px 20px;
+    }
+
+    .csr-footer-links {
+        flex-wrap: wrap;
+        gap: 12px;
+    }
+
+    /* Forms */
+    .bofa-form-input,
+    .bofa-form-select {
+        padding: 10px 14px;
+        font-size: 0.88rem;
+    }
+
+    /* Demo mode banner */
+    #demoModeBanner {
+        font-size: 0.75rem !important;
+        padding: 8px 12px !important;
     }
 }
+
+/* --- Small phones (max-width: 380px) --- */
+@media (max-width: 380px) {
+    .bofa-brand-title {
+        font-size: 0.95rem;
+    }
+
+    .bofa-hero-heading {
+        font-size: 1.15rem;
+    }
+
+    .bofa-total-amount {
+        font-size: 1.65rem;
+    }
+
+    .bofa-currency {
+        font-size: 1.1rem;
+    }
+
+    .bofa-nav-item {
+        padding: 8px 10px;
+        font-size: 0.7rem;
+    }
+
+    .bofa-card-number {
+        font-size: 0.88rem;
+        letter-spacing: 0.08em;
+    }
+}
+
