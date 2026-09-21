@@ -1,6 +1,3 @@
-const path = require("path");
-const swaggerUiDist = require("swagger-ui-dist");
-
 const swaggerUi = require("swagger-ui-express");
 
 const swaggerSpec = require("./config/swagger");
@@ -29,56 +26,16 @@ app.use(cors());
 
 app.use(express.json());
 
-app.get("/api-docs/swagger-ui-bundle.js", (req, res) => {
-    res.sendFile(
-        path.join(
-            swaggerUiDist.getAbsoluteFSPath(),
-            "swagger-ui-bundle.js"
-        )
-    );
-});
-
-app.get("/api-docs/swagger-ui-standalone-preset.js", (req, res) => {
-    res.sendFile(
-        path.join(
-            swaggerUiDist.getAbsoluteFSPath(),
-            "swagger-ui-standalone-preset.js"
-        )
-    );
-});
-
-app.get("/api-docs/swagger-ui.css", (req, res) => {
-    res.sendFile(
-        path.join(
-            swaggerUiDist.getAbsoluteFSPath(),
-            "swagger-ui.css"
-        )
-    );
-});
-
-app.get("/api-docs/favicon-32x32.png", (req, res) => {
-    res.sendFile(
-        path.join(
-            swaggerUiDist.getAbsoluteFSPath(),
-            "favicon-32x32.png"
-        )
-    );
-});
-
-app.get("/api-docs/favicon-16x16.png", (req, res) => {
-    res.sendFile(
-        path.join(
-            swaggerUiDist.getAbsoluteFSPath(),
-            "favicon-16x16.png"
-        )
-    );
-});
-
 app.use(
     "/api-docs",
     swaggerUi.serve,
     swaggerUi.setup(swaggerSpec, {
         customSiteTitle: "CSRevolus Bank API Documentation",
+        customCssUrl: "https://unpkg.com/swagger-ui-dist@5/swagger-ui.css",
+        customJs: [
+            "https://unpkg.com/swagger-ui-dist@5/swagger-ui-bundle.js",
+            "https://unpkg.com/swagger-ui-dist@5/swagger-ui-standalone-preset.js",
+        ],
         customCss: `
             .swagger-ui .topbar {
                 background-color: #111827;
