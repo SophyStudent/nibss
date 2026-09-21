@@ -77,7 +77,59 @@ app.get("/api-docs/favicon-16x16.png", (req, res) => {
 app.use(
     "/api-docs",
     swaggerUi.serve,
-    swaggerUi.setup(swaggerSpec)
+    swaggerUi.setup(swaggerSpec, {
+        customSiteTitle: "CSRevolus Bank API Documentation",
+        customCss: `
+            .swagger-ui .topbar {
+                background-color: #111827;
+            }
+
+            .swagger-ui .topbar-wrapper img {
+                display: none;
+            }
+
+            .swagger-ui .topbar-wrapper::before {
+                content: "CSRevolus Bank API";
+                color: white;
+                font-size: 20px;
+                font-weight: 600;
+            }
+
+            .swagger-ui .info {
+                margin: 30px 0;
+            }
+
+            .swagger-ui .info .title {
+                font-size: 30px;
+            }
+
+            .swagger-ui .opblock {
+                border-radius: 8px;
+                margin-bottom: 12px;
+            }
+
+            .swagger-ui .opblock-summary {
+                padding: 12px;
+            }
+
+            .swagger-ui .scheme-container {
+                box-shadow: none;
+            }
+
+            .swagger-ui section.models {
+                border-radius: 8px;
+            }
+        `,
+        swaggerOptions: {
+            docExpansion: "list",
+            defaultModelsExpandDepth: 1,
+            defaultModelExpandDepth: 1,
+            displayRequestDuration: true,
+            filter: true,
+            persistAuthorization: true,
+            tryItOutEnabled: false
+        }
+    })
 );
 
 
