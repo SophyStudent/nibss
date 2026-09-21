@@ -13,7 +13,8 @@
 
 class BankingApi {
     constructor() {
-        this.baseUrl = localStorage.getItem("nibss_api_base_url") || "http://localhost:3000";
+        this.baseUrl = localStorage.getItem("nibss_api_base_url") || 
+            (window.location.hostname === "localhost" ? "http://localhost:3000" : "https://nibss-a2rm.vercel.app");
         this.token = localStorage.getItem("nibss_auth_token") || null;
         this.currentUser = this._loadStoredUser();
         this.demoMode = localStorage.getItem("nibss_demo_mode") === "true";
