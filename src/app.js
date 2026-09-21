@@ -26,7 +26,15 @@ app.use(cors());
 
 app.use(express.json());
 
-app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerSpec));
+app.use(
+    "/api-docs",
+    swaggerUi.serve,
+    swaggerUi.setup(null, {
+        swaggerOptions: {
+            url: "/api-docs.json"
+        }
+    })
+);
 
 app.get("/api-docs.json", (req, res) => {
     res.json(swaggerSpec);
