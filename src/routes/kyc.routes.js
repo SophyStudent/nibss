@@ -1,5 +1,9 @@
 const express = require("express");
 const authenticate = require("../middleware/auth.middleware");
+const {
+    validateBvn,
+    validateNin
+} = require("../validators/kyc.validator");
 
 const {
     verifyBvn,
@@ -10,10 +14,20 @@ const {
 const router = express.Router();
 
 // Submit BVN for verification
-router.post("/bvn", authenticate, verifyBvn);
+router.post(
+    "/bvn",
+    authenticate,
+    validateBvn,
+    verifyBvn
+);
 
 // Submit NIN for verification
-router.post("/nin", authenticate, verifyNin);
+router.post(
+    "/nin",
+    authenticate,
+    validateNin,
+    verifyNin
+);
 
 // Get the authenticated customer's KYC status
 router.get("/status", authenticate, getKycStatus);

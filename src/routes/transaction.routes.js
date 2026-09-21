@@ -1,5 +1,9 @@
 const express = require("express");
 const authenticate = require("../middleware/auth.middleware");
+const {
+    validateTransfer
+} = require("../validators/transaction.validator");
+
 
 const {
     transfer,
@@ -27,6 +31,7 @@ router.get(
 router.post(
     "/transfer",
     authenticate,
+    validateTransfer,
     transfer
 );
 
