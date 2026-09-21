@@ -1,0 +1,1078 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Expires" content="0">
+    <title>CSRevolus Bank | CSR Digital Banking Platform</title>
+    <link rel="stylesheet" href="css/bofa.css?v=3.1">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 48 48'><rect width='48' height='48' rx='10' fill='%23071324'/><path d='M14 14H26C31.5 14 35 17.5 35 23C35 28.5 31.5 32 26 32H14V14Z' stroke='%239E1B32' stroke-width='4'/><path d='M23 25L33 36' stroke='%23C5A059' stroke-width='4'/></svg>">
+</head>
+<body>
+
+<!-- INSTANT DEMO PREVIEW NOTIFICATION BANNER -->
+<div id="demoModeBanner" style="display: none; background: #FEF3C7; border-bottom: 1px solid #F59E0B; color: #92400E; padding: 10px 20px; font-size: 0.83rem; text-align: center; font-weight: 600;">
+    <span style="background: #D97706; color: white; padding: 2px 8px; border-radius: 4px; font-size: 0.72rem; margin-right: 8px; text-transform: uppercase; font-weight: 700;">Instant Demo Preview</span>
+    You are currently exploring simulated sandbox data for evaluation.
+    <a href="javascript:void(0)" onclick="app.handleSignOut()" style="color: #B45309; text-decoration: underline; margin-left: 8px; font-weight: 700;">Sign in with your credentials for Live Banking</a>
+</div>
+
+<!-- EXECUTIVE PRE-HEADER (SECURITY & COMPLIANCE) -->
+<header class="bofa-security-bar">
+    <div class="bofa-security-items">
+        <span class="bofa-security-badge">
+            <svg viewBox="0 0 24 24" fill="currentColor">
+                <path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm0 10.99h7c-.53 4.12-3.28 7.79-7 8.94V12H5V6.3l7-3.11v8.8z"/>
+            </svg>
+            Bank-Grade 256-Bit SSL Encryption
+        </span>
+        <span class="bofa-security-badge">
+            <span class="bofa-status-dot" id="systemStatusDot"></span>
+            <span id="systemStatusText">NIBSS Settlement Gateway: Online</span>
+        </span>
+        <span class="bofa-security-badge" style="color: #64748B;">
+            NDIC Insured &bull; Direct Switch
+        </span>
+    </div>
+    <div class="bofa-security-actions">
+        <span id="liveClock" style="font-family: 'Space Grotesk', monospace; color: #E2E8F0;">--:--:--</span>
+        <a class="bofa-security-link" onclick="app.showSection('diagnostics')">Developer Gateway</a>
+        <a class="bofa-security-link" href="http://localhost:3000/api-docs" target="_blank" rel="noopener noreferrer">Swagger API Docs</a>
+    </div>
+</header>
+
+<!-- PRIMARY INSTITUTIONAL HEADER -->
+<div class="bofa-header">
+    <div class="bofa-header-top">
+        <a href="#" class="bofa-brand" onclick="app.showSection('overview'); return false;">
+            <div class="csr-logo-emblem">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                    <polygon points="12 2 2 7 12 12 22 7 12 2"></polygon>
+                    <polyline points="2 17 12 22 22 17"></polyline>
+                    <polyline points="2 12 12 17 22 12"></polyline>
+                </svg>
+            </div>
+            <div class="bofa-brand-text">
+                <div class="bofa-brand-title">
+                    CSRevolus <span>Bank</span>
+                    <span class="csr-badge-tag">Premier</span>
+                </div>
+                <div class="bofa-brand-subtitle">CSR Digital Banking Platform</div>
+            </div>
+        </a>
+
+        <div class="bofa-header-user" id="headerUserArea">
+            <!-- Dynamically populated via JS -->
+        </div>
+    </div>
+
+    <!-- NAVIGATION TABS -->
+    <nav class="bofa-nav-bar" id="mainNav" style="display: none;">
+        <a class="bofa-nav-item active" data-section="overview" onclick="app.showSection('overview')">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><rect x="3" y="3" width="7" height="9" rx="1"></rect><rect x="14" y="3" width="7" height="5" rx="1"></rect><rect x="14" y="12" width="7" height="9" rx="1"></rect><rect x="3" y="16" width="7" height="5" rx="1"></rect></svg>
+            Portfolio Overview
+        </a>
+        <a class="bofa-nav-item" data-section="accounts" onclick="app.showSection('accounts')">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><rect x="2" y="5" width="20" height="14" rx="2"></rect><line x1="2" y1="10" x2="22" y2="10"></line></svg>
+            Bank Accounts
+        </a>
+        <a class="bofa-nav-item" data-section="transfer" onclick="app.showSection('transfer')">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><line x1="7" y1="17" x2="17" y2="7"></line><polyline points="7 7 17 7 17 17"></polyline></svg>
+            Pay & Transfer
+        </a>
+        <a class="bofa-nav-item" data-section="kyc" onclick="app.showSection('kyc')">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path><path d="m9 12 2 2 4-4"></path></svg>
+            Identity & KYC
+        </a>
+        <a class="bofa-nav-item" data-section="activity" onclick="app.showSection('activity')">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+            Activity & TSQ
+        </a>
+        <a class="bofa-nav-item" data-section="diagnostics" onclick="app.showSection('diagnostics')">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><circle cx="12" cy="12" r="3"></circle><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0 1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path></svg>
+            Developer Gateway
+        </a>
+    </nav>
+</div>
+
+<div class="bofa-accent-strip"></div>
+
+<main class="bofa-main">
+
+    <!-- ===================================================================
+         1. AUTHENTICATION VIEW
+         =================================================================== -->
+    <section id="view-auth" class="bofa-section active">
+        <div style="max-width: 460px; margin: 40px auto;">
+            <div class="bofa-card" style="box-shadow: var(--csr-shadow-xl);">
+                <div class="bofa-card-header" style="justify-content: center; flex-direction: column; text-align: center; padding: 32px 28px 20px;">
+                    <div class="csr-logo-emblem" style="width: 48px; height: 48px; margin-bottom: 14px;">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="width: 26px; height: 26px;">
+                            <polygon points="12 2 2 7 12 12 22 7 12 2"></polygon>
+                            <polyline points="2 17 12 22 22 17"></polyline>
+                            <polyline points="2 12 12 17 22 12"></polyline>
+                        </svg>
+                    </div>
+                    <h2 class="bofa-card-title" style="font-size: 1.35rem; font-family: var(--csr-font-display);">CSRevolus Online Portal</h2>
+                    <p style="font-size: 0.8rem; color: #64748B; margin-top: 4px;">Sign in to access your accounts or register as a new client</p>
+                </div>
+
+                <div style="display: flex; border-bottom: 1px solid var(--csr-border); background: #FAFBFD;">
+                    <button id="tabBtnLogin" class="bofa-btn" style="flex: 1; border-radius: 0; border: none; border-bottom: 2px solid var(--csr-crimson); background: white; font-weight: 700; color: var(--csr-midnight-950);" onclick="app.switchAuthTab('login')">Client Sign In</button>
+                    <button id="tabBtnRegister" class="bofa-btn" style="flex: 1; border-radius: 0; border: none; background: transparent; color: #64748B;" onclick="app.switchAuthTab('register')">Register New Client</button>
+                </div>
+
+                <div class="bofa-card-body" style="padding: 28px;">
+                    <!-- LOGIN FORM -->
+                    <form id="loginForm" onsubmit="app.handleLogin(event)">
+                        <div class="bofa-form-group">
+                            <label class="bofa-form-label">Client Email Address</label>
+                            <input type="email" id="loginEmail" class="bofa-form-input" placeholder="e.g. client@csrevolus.com" required autocomplete="username">
+                        </div>
+                        <div class="bofa-form-group">
+                            <label class="bofa-form-label">Password</label>
+                            <input type="password" id="loginPassword" class="bofa-form-input" placeholder="••••••••••••" required autocomplete="current-password">
+                        </div>
+                        <button type="submit" id="loginSubmitBtn" class="bofa-btn bofa-btn-primary" style="width: 100%; padding: 13px;">
+                            Secure Client Sign In
+                        </button>
+                    </form>
+
+                    <!-- REGISTER FORM -->
+                    <form id="registerForm" style="display: none;" onsubmit="app.handleRegister(event)">
+                        <div class="bofa-form-group">
+                            <label class="bofa-form-label">Full Legal Name</label>
+                            <input type="text" id="regName" class="bofa-form-input" placeholder="e.g. Chisom Sophy" required>
+                        </div>
+                        <div class="bofa-form-group">
+                            <label class="bofa-form-label">Email Address</label>
+                            <input type="email" id="regEmail" class="bofa-form-input" placeholder="e.g. sophy@example.com" required autocomplete="username">
+                        </div>
+                        <div class="bofa-form-group">
+                            <label class="bofa-form-label">Password (Min. 8 characters)</label>
+                            <input type="password" id="regPassword" class="bofa-form-input" placeholder="Create secure password" minlength="8" required autocomplete="new-password">
+                            <div class="bofa-form-hint">Stored securely using bcrypt cryptographic hashing</div>
+                        </div>
+                        <button type="submit" id="regSubmitBtn" class="bofa-btn bofa-btn-primary" style="width: 100%; padding: 13px;">
+                            Complete Client Enrollment
+                        </button>
+                    </form>
+
+                    <div style="margin-top: 24px; padding-top: 20px; border-top: 1px dashed var(--csr-border); text-align: center;">
+                        <div style="font-size: 0.74rem; color: #64748B; margin-bottom: 10px; font-weight: 500;">Evaluation & Sandbox Shortcuts:</div>
+                        <div style="display: flex; gap: 8px; justify-content: center; flex-wrap: wrap;">
+                            <button type="button" class="bofa-btn bofa-btn-outline bofa-btn-sm" onclick="app.fillTestCustomer()">
+                                Autofill Test Client
+                            </button>
+                            <button type="button" class="bofa-btn bofa-btn-outline bofa-btn-sm" onclick="app.enableDemoBypass()">
+                                Instant Demo Preview
+                            </button>
+                            <button type="button" class="bofa-btn bofa-btn-outline bofa-btn-sm" onclick="app.resetDemoSession()" title="Clear cached browser session">
+                                Clear Cache
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===================================================================
+         2. PORTFOLIO OVERVIEW / DASHBOARD VIEW
+         =================================================================== -->
+    <section id="view-overview" class="bofa-section">
+        <!-- 1. WHO AM I & WHAT DO I HAVE: HERO BANNER -->
+        <div class="bofa-hero-banner">
+            <div class="bofa-hero-content">
+                <div>
+                    <div class="bofa-hero-greeting" id="dashGreeting">
+                        <span class="bofa-status-dot"></span>
+                        CSRevolus Private Wealth Portal
+                    </div>
+                    <div class="bofa-hero-heading" id="dashCustomerName">Distinguished Client</div>
+                    <div style="font-size: 0.82rem; color: #94A3B8; margin-top: -2px; margin-bottom: 16px;" id="dashCustomerEmail">client@csrevolus.com</div>
+                    <div class="bofa-total-balance">
+                        <div class="bofa-total-label">Total Liquid Assets &bull; NIBSS Authoritative Balance</div>
+                        <div class="bofa-total-amount">
+                            <span class="bofa-currency">₦</span>
+                            <span id="dashTotalBalance">0.00</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bofa-hero-actions">
+                    <button class="bofa-btn bofa-btn-primary" onclick="app.showSection('transfer')">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="7" y1="17" x2="17" y2="7"></line><polyline points="7 7 17 7 17 17"></polyline></svg>
+                        Instant Transfer
+                    </button>
+                    <button class="bofa-btn bofa-btn-secondary" onclick="app.refreshAllData()">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="23 4 23 10 17 10"></polyline><polyline points="1 20 1 14 7 14"></polyline><path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"></path></svg>
+                        Sync Balance
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <div class="bofa-grid-2">
+            <!-- 2. WHAT DO I HAVE: EXECUTIVE DEBIT CARD -->
+            <div class="bofa-card">
+                <div class="bofa-card-header">
+                    <span class="bofa-card-title">Digital Executive Debit Card</span>
+                    <span style="font-size: 0.74rem; font-weight: 600; color: var(--csr-gold); letter-spacing: 0.04em;">NIBSS CENTRAL SWITCH</span>
+                </div>
+                <div class="bofa-card-body" style="display: flex; justify-content: center; align-items: center; padding: 24px 20px;">
+                    <div class="bofa-card-wrapper">
+                        <div class="bofa-digital-card">
+                            <div class="bofa-card-top">
+                                <span class="bofa-card-bank-name" id="cardBankName">CSREVOLUS BANK</span>
+                                <span class="bofa-card-tier">PLATINUM CLIENT</span>
+                            </div>
+                            <div class="bofa-card-middle">
+                                <div class="bofa-emv-chip"></div>
+                                <svg class="bofa-contactless-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                                    <path d="M8.5 16.5a5 5 0 0 1 0-7"></path>
+                                    <path d="M12 19a8.5 8.5 0 0 0 0-14"></path>
+                                    <path d="M15.5 21.5a12 12 0 0 0 0-19"></path>
+                                </svg>
+                            </div>
+                            <div class="bofa-card-number-row">
+                                <span class="bofa-card-number" id="cardMaskedNumber">&bull;&bull;&bull;&bull; &bull;&bull;&bull;&bull; &bull;&bull;&bull;&bull; &bull;&bull;&bull;&bull;</span>
+                                <button class="bofa-btn-reveal" title="Show/Hide Account Number" onclick="app.toggleCardNumberReveal()">
+                                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path><circle cx="12" cy="12" r="3"></circle></svg>
+                                </button>
+                            </div>
+                            <div class="bofa-card-bottom">
+                                <div>
+                                    <div class="bofa-card-holder-label">Primary Cardholder</div>
+                                    <div class="bofa-card-holder-name" id="cardHolderName">--</div>
+                                </div>
+                                <div style="text-align: right;">
+                                    <div class="bofa-card-expiry-label">Expires</div>
+                                    <div class="bofa-card-expiry">12/29</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 3. IS MY IDENTITY VERIFIED? + QUICK ACTIONS -->
+            <div>
+                <div class="bofa-card">
+                    <div class="bofa-card-header">
+                        <span class="bofa-card-title">Identity & Compliance Tier</span>
+                        <span class="bofa-status-pill bofa-status-pending" id="dashKycPill">Tier 0 - Pending</span>
+                    </div>
+                    <div class="bofa-card-body">
+                        <p style="font-size: 0.85rem; color: #475569; margin-bottom: 16px;">
+                            Verified identity credentials link your customer profile directly with the NIBSS central repository to enable account generation and interbank transfers.
+                        </p>
+                        <div style="display: flex; gap: 12px; margin-bottom: 18px;">
+                            <div style="flex: 1; padding: 10px 14px; background: #F8FAFC; border: 1px solid var(--csr-border); border-radius: 8px;">
+                                <div style="font-size: 0.72rem; color: #64748B; font-weight: 600; text-transform: uppercase;">BVN Status</div>
+                                <div style="font-weight: 700; font-size: 0.88rem; color: var(--csr-midnight-950);" id="dashBvnStatus">Unverified</div>
+                            </div>
+                            <div style="flex: 1; padding: 10px 14px; background: #F8FAFC; border: 1px solid var(--csr-border); border-radius: 8px;">
+                                <div style="font-size: 0.72rem; color: #64748B; font-weight: 600; text-transform: uppercase;">NIN Status</div>
+                                <div style="font-weight: 700; font-size: 0.88rem; color: var(--csr-midnight-950);" id="dashNinStatus">Unverified</div>
+                            </div>
+                        </div>
+                        <div style="display: flex; gap: 12px;">
+                            <button class="bofa-btn bofa-btn-primary bofa-btn-sm" style="flex: 1;" onclick="app.showSection('kyc')">
+                                Verify BVN / NIN
+                            </button>
+                            <button class="bofa-btn bofa-btn-outline bofa-btn-sm" style="flex: 1;" onclick="app.showSection('accounts')">
+                                View Accounts
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bofa-card">
+                    <div class="bofa-card-header">
+                        <span class="bofa-card-title">Express Transfer Presets</span>
+                        <span class="bofa-security-link" style="color: var(--csr-crimson); font-size: 0.8rem; font-weight: 600;" onclick="app.showSection('transfer')">Custom &rarr;</span>
+                    </div>
+                    <div class="bofa-card-body">
+                        <div class="bofa-grid-2" style="gap: 12px;">
+                            <div style="padding: 14px 16px; background-color: #F8FAFC; border: 1px solid var(--csr-border); border-radius: 8px; cursor: pointer; transition: all 0.2s;" onmouseover="this.style.borderColor='var(--csr-crimson)'" onmouseout="this.style.borderColor='var(--csr-border)'" onclick="app.quickTransferAmount(2500)">
+                                <div style="font-size: 0.72rem; color: #64748B; font-weight: 600; text-transform: uppercase;">Express Preset</div>
+                                <div style="font-family: var(--csr-font-display); font-size: 1.2rem; font-weight: 700; color: var(--csr-midnight-950);">₦2,500</div>
+                            </div>
+                            <div style="padding: 14px 16px; background-color: #F8FAFC; border: 1px solid var(--csr-border); border-radius: 8px; cursor: pointer; transition: all 0.2s;" onmouseover="this.style.borderColor='var(--csr-crimson)'" onmouseout="this.style.borderColor='var(--csr-border)'" onclick="app.quickTransferAmount(5000)">
+                                <div style="font-size: 0.72rem; color: #64748B; font-weight: 600; text-transform: uppercase;">Express Preset</div>
+                                <div style="font-family: var(--csr-font-display); font-size: 1.2rem; font-weight: 700; color: var(--csr-midnight-950);">₦5,000</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 4. WHAT HAVE I DONE RECENTLY: RECENT TRANSACTIONS -->
+        <div class="bofa-card">
+            <div class="bofa-card-header">
+                <span class="bofa-card-title">Recent Settled Activity</span>
+                <a class="bofa-security-link" style="color: var(--csr-crimson); font-weight: 600; font-size: 0.85rem;" onclick="app.showSection('activity')">Full Statement Ledger &rarr;</a>
+            </div>
+            <div class="bofa-card-body" style="padding: 0;">
+                <div class="bofa-table-wrapper">
+                    <table class="bofa-table">
+                        <thead>
+                            <tr>
+                                <th>Settlement Date</th>
+                                <th>Transaction ID</th>
+                                <th>Description / Reference</th>
+                                <th>Status</th>
+                                <th style="text-align: right;">Amount</th>
+                                <th style="text-align: center;">Official Slip</th>
+                            </tr>
+                        </thead>
+                        <tbody id="dashTxnTableBody">
+                            <tr>
+                                <td colspan="6" style="text-align: center; color: #64748B; padding: 28px;">
+                                    Retrieving transaction history from backend...
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===================================================================
+         3. BANK ACCOUNTS VIEW
+         =================================================================== -->
+    <section id="view-accounts" class="bofa-section">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 24px; flex-wrap: wrap; gap: 12px;">
+            <div>
+                <h2 style="font-size: 1.45rem; font-weight: 800; font-family: var(--csr-font-display); color: var(--csr-midnight-950);">Customer Bank Accounts</h2>
+                <p style="font-size: 0.85rem; color: #64748B;">NUBAN accounts linked to CSRevolus Bank and NIBSS interbank routing</p>
+            </div>
+            <button class="bofa-btn bofa-btn-primary" id="btnOpenNewAccountHeader" onclick="app.openCreateAccountModal()">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
+                Open New Bank Account
+            </button>
+        </div>
+
+        <div id="accountsEndpointAlert" style="display: none; padding: 14px 18px; border-radius: 8px; background: #FEF2F2; border: 1px solid #FCA5A5; color: #991B1B; margin-bottom: 20px; font-size: 0.88rem;">
+            <!-- Rendered dynamically on error -->
+        </div>
+
+        <div class="bofa-grid-3" id="accountsGrid">
+            <!-- Dynamically populated from /api/accounts -->
+        </div>
+    </section>
+
+    <!-- ===================================================================
+         4. PAY & TRANSFER VIEW
+         =================================================================== -->
+    <section id="view-transfer" class="bofa-section">
+        <div style="max-width: 680px; margin: 0 auto;">
+            <div style="margin-bottom: 24px; text-align: center;">
+                <h2 style="font-size: 1.45rem; font-weight: 800; font-family: var(--csr-font-display); color: var(--csr-midnight-950);">Pay & Transfer</h2>
+                <p style="font-size: 0.85rem; color: #64748B;">Instant interbank fund transfers routed through NIBSS Central Switch</p>
+            </div>
+
+            <div class="bofa-card">
+                <div class="bofa-card-header">
+                    <span class="bofa-card-title">Interbank Funds Transfer</span>
+                    <span class="bofa-security-badge" style="color: #059669; font-size: 0.78rem;">
+                        <span class="bofa-status-dot"></span>
+                        NIBSS Direct Settlement
+                    </span>
+                </div>
+
+                <div class="bofa-card-body">
+                    <form id="transferForm" onsubmit="app.handleTransfer(event)">
+                        <!-- STEP 1: SOURCE ACCOUNT -->
+                        <div class="bofa-form-group">
+                            <label class="bofa-form-label">
+                                <span style="display: inline-block; width: 20px; height: 20px; border-radius: 50%; background: var(--csr-midnight-950); color: white; text-align: center; line-height: 20px; font-size: 0.72rem; margin-right: 6px;">1</span>
+                                Select Source Account (Debit)
+                            </label>
+                            <select id="transferFromAccount" class="bofa-form-select" onchange="app.onTransferSourceChanged()" required>
+                                <option value="">Select source account...</option>
+                            </select>
+                            <div class="bofa-form-hint" id="transferSourceBalanceHint">Available balance: ₦0.00</div>
+                        </div>
+
+                        <!-- STEP 2: RECIPIENT NUBAN -->
+                        <div class="bofa-form-group">
+                            <label class="bofa-form-label">
+                                <span style="display: inline-block; width: 20px; height: 20px; border-radius: 50%; background: var(--csr-midnight-950); color: white; text-align: center; line-height: 20px; font-size: 0.72rem; margin-right: 6px;">2</span>
+                                Recipient 10-Digit NUBAN Account Number
+                            </label>
+                            <input type="text" id="transferToAccount" class="bofa-form-input" placeholder="e.g. 1087207670" maxlength="10" inputmode="numeric" oninput="app.onRecipientInput(this.value)" required>
+
+                            <!-- Live Mode Info / Demo Preview Badge -->
+                            <div id="transferRecipientNotice" style="margin-top: 8px; font-size: 0.78rem; color: #64748B; display: flex; align-items: center; gap: 6px;">
+                                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="16" x2="12" y2="12"></line><line x1="12" y1="8" x2="12.01" y2="8"></line></svg>
+                                <span>Recipient account will be validated via NIBSS during transfer authorization.</span>
+                            </div>
+
+                            <div id="nameEnquiryResult" class="bofa-name-enquiry-badge" style="display: none;">
+                                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
+                                <span id="nameEnquiryText">Recipient verified</span>
+                            </div>
+                        </div>
+
+                        <!-- STEP 3: AMOUNT -->
+                        <div class="bofa-form-group">
+                            <label class="bofa-form-label">
+                                <span style="display: inline-block; width: 20px; height: 20px; border-radius: 50%; background: var(--csr-midnight-950); color: white; text-align: center; line-height: 20px; font-size: 0.72rem; margin-right: 6px;">3</span>
+                                Transfer Amount (₦)
+                            </label>
+                            <input type="number" id="transferAmount" class="bofa-form-input" placeholder="Min. ₦100" min="100" step="100" oninput="app.updateTransferReview()" required>
+
+                            <div class="bofa-amount-chips">
+                                <span class="bofa-chip" onclick="app.setTransferAmount(1000)">+₦1,000</span>
+                                <span class="bofa-chip" onclick="app.setTransferAmount(2500)">+₦2,500</span>
+                                <span class="bofa-chip" onclick="app.setTransferAmount(5000)">+₦5,000</span>
+                                <span class="bofa-chip" onclick="app.setTransferAmount(10000)">+₦10,000</span>
+                                <span class="bofa-chip" onclick="app.setTransferAmount(25000)">+₦25,000</span>
+                            </div>
+                        </div>
+
+                        <!-- OPTIONAL NARRATION -->
+                        <div class="bofa-form-group">
+                            <label class="bofa-form-label">Transaction Reference / Narration (Optional)</label>
+                            <input type="text" id="transferRemarks" class="bofa-form-input" placeholder="e.g. Invoice settlement / Family support">
+                        </div>
+
+                        <!-- STEP 4: REVIEW TRANSFER DETAILS -->
+                        <div style="background-color: #F8FAFC; border: 1px solid var(--csr-border); border-radius: 8px; padding: 18px; margin-bottom: 22px; font-size: 0.85rem;">
+                            <div style="font-weight: 700; color: var(--csr-midnight-950); margin-bottom: 12px; display: flex; align-items: center; gap: 6px;">
+                                <span style="display: inline-block; width: 20px; height: 20px; border-radius: 50%; background: var(--csr-midnight-950); color: white; text-align: center; line-height: 20px; font-size: 0.72rem;">4</span>
+                                Review Transfer Summary
+                            </div>
+                            <div style="display: flex; justify-content: space-between; margin-bottom: 6px;">
+                                <span style="color: #64748B;">Debit Account:</span>
+                                <span style="font-weight: 600; color: var(--csr-midnight-950);" id="reviewFromAcc">--</span>
+                            </div>
+                            <div style="display: flex; justify-content: space-between; margin-bottom: 6px;">
+                                <span style="color: #64748B;">Recipient NUBAN:</span>
+                                <span style="font-weight: 600; color: var(--csr-midnight-950);" id="reviewToAcc">--</span>
+                            </div>
+                            <div style="display: flex; justify-content: space-between; margin-bottom: 6px;">
+                                <span style="color: #64748B;">Transfer Principal:</span>
+                                <span style="font-weight: 700; color: var(--csr-midnight-950);" id="reviewAmount">₦0.00</span>
+                            </div>
+                            <div style="display: flex; justify-content: space-between; margin-bottom: 6px;">
+                                <span style="color: #64748B;">NIBSS Settlement Fee:</span>
+                                <span style="font-weight: 700; color: #059669;">₦0.00 (Zero Fee Waiver)</span>
+                            </div>
+                            <div style="display: flex; justify-content: space-between; border-top: 1px dashed var(--csr-border); padding-top: 8px; margin-top: 8px;">
+                                <span style="color: #64748B;">Settlement Protocol:</span>
+                                <span style="font-weight: 600; color: var(--csr-midnight-950);">Instant Central Switch (NIP)</span>
+                            </div>
+                        </div>
+
+                        <!-- STEP 5: CONFIRM TRANSFER -->
+                        <button type="submit" id="transferSubmitBtn" class="bofa-btn bofa-btn-primary" style="width: 100%; padding: 14px; font-size: 0.95rem;">
+                            Step 5 &bull; Authorize & Execute Transfer
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===================================================================
+         5. IDENTITY & KYC CENTER
+         =================================================================== -->
+    <section id="view-kyc" class="bofa-section">
+        <div style="margin-bottom: 24px;">
+            <h2 style="font-size: 1.45rem; font-weight: 800; font-family: var(--csr-font-display); color: var(--csr-midnight-950);">Identity & KYC Compliance</h2>
+            <p style="font-size: 0.85rem; color: #64748B;">Verify your identity against the NIBSS central identity repository (BVN & NIN)</p>
+        </div>
+
+        <!-- OVERALL KYC STATUS CARD -->
+        <div class="bofa-card" style="border-left: 5px solid var(--csr-crimson);">
+            <div class="bofa-card-body" style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px;">
+                <div>
+                    <div style="font-size: 0.74rem; text-transform: uppercase; color: #64748B; font-weight: 700; letter-spacing: 0.06em;">Compliance Verification Level</div>
+                    <div style="font-size: 1.3rem; font-weight: 800; color: var(--csr-midnight-950); font-family: var(--csr-font-display);" id="kycTierTitle">Tier 0 &bull; Unverified Client</div>
+                    <div style="font-size: 0.85rem; color: #64748B; margin-top: 4px;" id="kycTierDesc">
+                        Verify your BVN or NIN with NIBSS to unlock account opening and interbank settlement.
+                    </div>
+                </div>
+                <div style="text-align: right;">
+                    <span class="bofa-status-pill bofa-status-pending" id="kycOverallBadge">Action Required</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="bofa-grid-2">
+            <!-- BVN VERIFICATION CARD -->
+            <div class="bofa-card">
+                <div class="bofa-card-header">
+                    <span class="bofa-card-title">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="16" rx="2"></rect><line x1="7" y1="8" x2="17" y2="8"></line><line x1="7" y1="12" x2="17" y2="12"></line><line x1="7" y1="16" x2="13" y2="16"></line></svg>
+                        Verify BVN (Bank Verification Number)
+                    </span>
+                    <span class="bofa-status-pill bofa-status-pending" id="bvnStatusPill">Unverified</span>
+                </div>
+                <div class="bofa-card-body">
+                    <div id="bvnOutstandingContainer">
+                        <p style="font-size: 0.82rem; color: #64748B; margin-bottom: 18px;">
+                            Verification is performed securely through the central interbank verification network.
+                        </p>
+                        <form onsubmit="app.handleVerifyBvn(event)">
+                            <div class="bofa-form-group">
+                                <label class="bofa-form-label">11-Digit BVN</label>
+                                <input type="text" id="bvnInput" class="bofa-form-input" placeholder="e.g. 10840712848" maxlength="11" inputmode="numeric" required>
+                                <div class="bofa-form-hint">Must be 11 numeric digits</div>
+                            </div>
+                            <div class="bofa-grid-2" style="gap: 12px; margin-bottom: 0;">
+                                <div class="bofa-form-group">
+                                    <label class="bofa-form-label">First Name</label>
+                                    <input type="text" id="bvnFirstName" class="bofa-form-input" placeholder="e.g. Chisom" required>
+                                </div>
+                                <div class="bofa-form-group">
+                                    <label class="bofa-form-label">Last Name</label>
+                                    <input type="text" id="bvnLastName" class="bofa-form-input" placeholder="e.g. Abraham" required>
+                                </div>
+                            </div>
+                            <div class="bofa-grid-2" style="gap: 12px; margin-bottom: 0;">
+                                <div class="bofa-form-group">
+                                    <label class="bofa-form-label">Date of Birth</label>
+                                    <input type="date" id="bvnDob" class="bofa-form-input" required>
+                                </div>
+                                <div class="bofa-form-group">
+                                    <label class="bofa-form-label">Phone Number</label>
+                                    <input type="tel" id="bvnPhone" class="bofa-form-input" placeholder="e.g. 08012345678" required>
+                                </div>
+                            </div>
+                            <div style="display: flex; gap: 8px;">
+                                <button type="submit" id="bvnSubmitBtn" class="bofa-btn bofa-btn-primary" style="flex: 1;">
+                                    Verify BVN with NIBSS
+                                </button>
+                                <button type="button" class="bofa-btn bofa-btn-outline" onclick="app.fillSampleBvn()">
+                                    Sample BVN
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+
+                    <div id="bvnVerifiedPanel" style="display: none; padding: 28px 20px; border-radius: 8px; background: linear-gradient(180deg, #F0FDF4 0%, #DCFCE7 100%); border: 1px solid #BBF7D0; text-align: center;">
+                        <div style="width: 52px; height: 52px; background: #22C55E; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 14px auto; color: #FFFFFF; box-shadow: 0 4px 12px rgba(34, 197, 94, 0.25);">
+                            <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.8"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                        </div>
+                        <h4 style="font-size: 1.15rem; font-weight: 800; color: #14532D; margin-bottom: 6px; font-family: var(--csr-font-display);">BVN Verified</h4>
+                        <p style="font-size: 0.85rem; color: #166534; line-height: 1.5; margin-bottom: 0;">
+                            Your Bank Verification Number has been validated and registered with the NIBSS central identity repository.
+                        </p>
+                    </div>
+
+                    <div id="bvnResultBox" style="display: none; margin-top: 16px; padding: 14px; border-radius: 8px; background-color: var(--csr-emerald-soft); border: 1px solid #A7F3D0; font-size: 0.82rem; color: #065F46;">
+                    </div>
+                </div>
+            </div>
+
+            <!-- NIN VERIFICATION CARD -->
+            <div class="bofa-card">
+                <div class="bofa-card-header">
+                    <span class="bofa-card-title">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
+                        Verify NIN (National Identity)
+                    </span>
+                    <span class="bofa-status-pill bofa-status-pending" id="ninStatusPill">Unverified</span>
+                </div>
+                <div class="bofa-card-body">
+                    <div id="ninOutstandingContainer">
+                        <p style="font-size: 0.82rem; color: #64748B; margin-bottom: 18px;">
+                            Verification is performed through the National Identity Management Commission via NIBSS.
+                        </p>
+                        <form onsubmit="app.handleVerifyNin(event)">
+                            <div class="bofa-form-group">
+                                <label class="bofa-form-label">11-Digit NIN</label>
+                                <input type="text" id="ninInput" class="bofa-form-input" placeholder="e.g. 10840712849" maxlength="11" inputmode="numeric" required>
+                                <div class="bofa-form-hint">Must be 11 numeric digits</div>
+                            </div>
+                            <div class="bofa-grid-2" style="gap: 12px; margin-bottom: 0;">
+                                <div class="bofa-form-group">
+                                    <label class="bofa-form-label">First Name</label>
+                                    <input type="text" id="ninFirstName" class="bofa-form-input" placeholder="e.g. Chisom" required>
+                                </div>
+                                <div class="bofa-form-group">
+                                    <label class="bofa-form-label">Last Name</label>
+                                    <input type="text" id="ninLastName" class="bofa-form-input" placeholder="e.g. Abraham" required>
+                                </div>
+                            </div>
+                            <div class="bofa-form-group">
+                                <label class="bofa-form-label">Date of Birth</label>
+                                <input type="date" id="ninDob" class="bofa-form-input" required>
+                            </div>
+                            <div style="display: flex; gap: 8px;">
+                                <button type="submit" id="ninSubmitBtn" class="bofa-btn bofa-btn-primary" style="flex: 1;">
+                                    Verify NIN with NIMC
+                                </button>
+                                <button type="button" class="bofa-btn bofa-btn-outline" onclick="app.fillSampleNin()">
+                                    Sample NIN
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+
+                    <div id="ninVerifiedPanel" style="display: none; padding: 28px 20px; border-radius: 8px; background: linear-gradient(180deg, #F0FDF4 0%, #DCFCE7 100%); border: 1px solid #BBF7D0; text-align: center;">
+                        <div style="width: 52px; height: 52px; background: #22C55E; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 14px auto; color: #FFFFFF; box-shadow: 0 4px 12px rgba(34, 197, 94, 0.25);">
+                            <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.8"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                        </div>
+                        <h4 style="font-size: 1.15rem; font-weight: 800; color: #14532D; margin-bottom: 6px; font-family: var(--csr-font-display);">NIN Verified</h4>
+                        <p style="font-size: 0.85rem; color: #166534; line-height: 1.5; margin-bottom: 0;">
+                            Your National Identification Number has been validated with NIMC via NIBSS.
+                        </p>
+                    </div>
+
+                    <div id="ninResultBox" style="display: none; margin-top: 16px; padding: 14px; border-radius: 8px; background-color: var(--csr-emerald-soft); border: 1px solid #A7F3D0; font-size: 0.82rem; color: #065F46;">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===================================================================
+         6. ACTIVITY & STATEMENTS & TSQ VIEW
+         =================================================================== -->
+    <section id="view-activity" class="bofa-section">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 24px; flex-wrap: wrap; gap: 12px;">
+            <div>
+                <h2 style="font-size: 1.45rem; font-weight: 800; font-family: var(--csr-font-display); color: var(--csr-midnight-950);">Activity & TSQ Query</h2>
+                <p style="font-size: 0.85rem; color: #64748B;">Settled transaction history and NIBSS Transaction Status Query (TSQ)</p>
+            </div>
+            <div style="display: flex; gap: 8px;">
+                <button class="bofa-btn bofa-btn-outline" onclick="window.print()">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 6 2 18 2 18 9"></polyline><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"></path><rect x="6" y="14" width="12" height="8"></rect></svg>
+                    Print Statement
+                </button>
+                <button class="bofa-btn bofa-btn-secondary" style="background: var(--csr-midnight-900);" onclick="app.refreshTransactions()">
+                    Sync Ledger
+                </button>
+            </div>
+        </div>
+
+        <!-- TSQ LOOKUP CARD (SEPARATE COMPACT AREA) -->
+        <div class="bofa-card" style="background-color: #F8FAFC;">
+            <div class="bofa-card-body" style="padding: 20px 24px;">
+                <div style="font-size: 0.74rem; font-weight: 700; text-transform: uppercase; color: #64748B; margin-bottom: 8px; letter-spacing: 0.06em;">
+                    Transaction Status Query (TSQ Lookup)
+                </div>
+                <div style="display: flex; gap: 12px; align-items: center; flex-wrap: wrap;">
+                    <input type="text" id="tsqInput" class="bofa-form-input" placeholder="Enter transaction reference (e.g. TX1789942294236)" style="background: white; flex: 1; min-width: 260px;">
+                    <button class="bofa-btn bofa-btn-primary" onclick="app.lookupTsq()">
+                        Verify Status & View Slip
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- FULL TRANSACTIONS TABLE -->
+        <div class="bofa-card">
+            <div class="bofa-card-header">
+                <span class="bofa-card-title">Statement Ledger</span>
+            </div>
+            <div class="bofa-card-body" style="padding: 0;">
+                <div class="bofa-table-wrapper">
+                    <table class="bofa-table">
+                        <thead>
+                            <tr>
+                                <th>Timestamp</th>
+                                <th>Transaction ID</th>
+                                <th>Source Account</th>
+                                <th>Beneficiary Account</th>
+                                <th>Narration</th>
+                                <th>Status</th>
+                                <th style="text-align: right;">Amount</th>
+                                <th style="text-align: center;">Official Slip</th>
+                            </tr>
+                        </thead>
+                        <tbody id="fullTxnTableBody">
+                            <tr>
+                                <td colspan="8" style="text-align: center; color: #64748B; padding: 28px;">
+                                    Retrieving transaction records...
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===================================================================
+         7. DEVELOPER GATEWAY & ENDPOINT HEALTH
+         =================================================================== -->
+    <section id="view-diagnostics" class="bofa-section">
+        <div style="margin-bottom: 24px;">
+            <h2 style="font-size: 1.45rem; font-weight: 800; font-family: var(--csr-font-display); color: var(--csr-midnight-950);">Developer Gateway & Architecture</h2>
+            <p style="font-size: 0.85rem; color: #64748B;">Technical configuration, connection diagnostics, and endpoint readiness matrix</p>
+        </div>
+
+        <div class="bofa-grid-2">
+            <!-- BASE URL CONFIG -->
+            <div class="bofa-card">
+                <div class="bofa-card-header">
+                    <span class="bofa-card-title">Backend Gateway Host</span>
+                </div>
+                <div class="bofa-card-body">
+                    <div class="bofa-form-group">
+                        <label class="bofa-form-label">API Gateway Base URL</label>
+                        <input type="text" id="cfgBaseUrl" class="bofa-form-input" value="http://localhost:3000">
+                        <div class="bofa-form-hint">Points to your local Express backend server (default: port 3000)</div>
+                    </div>
+                    <div style="display: flex; gap: 8px;">
+                        <button class="bofa-btn bofa-btn-primary" onclick="app.saveApiConfig()">
+                            Save & Test Gateway
+                        </button>
+                        <button class="bofa-btn bofa-btn-outline" onclick="app.resetApiConfig()">
+                            Reset Default
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- DEMO MODE -->
+            <div class="bofa-card">
+                <div class="bofa-card-header">
+                    <span class="bofa-card-title">Instant Demo Preview</span>
+                    <span class="bofa-status-pill bofa-status-success" id="demoStatusPill">Live Backend</span>
+                </div>
+                <div class="bofa-card-body">
+                    <p style="font-size: 0.85rem; color: #475569; margin-bottom: 16px;">
+                        Live Banking uses the authenticated backend API and real database/NIBSS data. Instant Demo Preview remains available separately for presentation and evaluation using simulated sandbox data.
+                    </p>
+                    <div style="display: flex; align-items: center; justify-content: space-between; padding: 14px 18px; background-color: #F8FAFC; border: 1px solid var(--csr-border); border-radius: 8px;">
+                        <div>
+                            <div style="font-weight: 700; font-size: 0.9rem; color: var(--csr-midnight-950);">Enable Instant Demo Preview</div>
+                            <div style="font-size: 0.75rem; color: #64748B;">Uses simulated data without altering the live backend.</div>
+                        </div>
+                        <input type="checkbox" id="chkDemoMode" style="width: 20px; height: 20px; cursor: pointer;" onchange="app.toggleDemoMode(this.checked)">
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- BACKEND HEALTH & SWAGGER DOCS -->
+        <div class="bofa-card">
+            <div class="bofa-card-header">
+                <span class="bofa-card-title">Gateway Connection & Documentation</span>
+            </div>
+            <div class="bofa-card-body">
+                <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px;">
+                    <div>
+                        <div style="font-weight: 700; color: var(--csr-midnight-950); font-size: 0.92rem;">Test Backend Reachability</div>
+                        <div style="font-size: 0.82rem; color: #64748B;">Verify connection to your active Express instance and Swagger UI.</div>
+                    </div>
+                    <div style="display: flex; gap: 10px;">
+                        <button class="bofa-btn bofa-btn-primary bofa-btn-sm" onclick="app.testBackendHealth()">
+                            Run Health Check
+                        </button>
+                        <a href="http://localhost:3000/api-docs" target="_blank" rel="noopener noreferrer" class="bofa-btn bofa-btn-outline bofa-btn-sm">
+                            Open Swagger UI &rarr;
+                        </a>
+                    </div>
+                </div>
+                <div id="backendHealthResult" style="display: none; margin-top: 14px; padding: 12px 16px; border-radius: 8px; font-size: 0.85rem;">
+                </div>
+            </div>
+        </div>
+
+        <!-- COMPREHENSIVE ENDPOINT MATRIX -->
+        <div class="bofa-card">
+            <div class="bofa-card-header">
+                <span class="bofa-card-title">Live Backend Endpoint Matrix</span>
+            </div>
+            <div class="bofa-card-body" style="padding: 0;">
+                <div class="bofa-table-wrapper">
+                    <table class="bofa-table">
+                        <thead>
+                            <tr>
+                                <th>Method</th>
+                                <th>Endpoint Path</th>
+                                <th>Functionality</th>
+                                <th>Auth Layer</th>
+                                <th>Status</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong style="color: #059669;">POST</strong></td>
+                                <td><code>/api/auth/register</code></td>
+                                <td>Register customer credentials</td>
+                                <td>None</td>
+                                <td><span class="bofa-status-pill bofa-status-success">Active & Live</span></td>
+                            </tr>
+                            <tr>
+                                <td><strong style="color: #059669;">POST</strong></td>
+                                <td><code>/api/auth/login</code></td>
+                                <td>Client authentication & JWT issuance</td>
+                                <td>None</td>
+                                <td><span class="bofa-status-pill bofa-status-success">Active & Live</span></td>
+                            </tr>
+                            <tr>
+                                <td><strong style="color: #2563EB;">GET</strong></td>
+                                <td><code>/api/customers/me</code></td>
+                                <td>Retrieve authenticated customer profile</td>
+                                <td>Bearer JWT</td>
+                                <td><span class="bofa-status-pill bofa-status-success">Active & Live</span></td>
+                            </tr>
+                            <tr>
+                                <td><strong style="color: #059669;">POST</strong></td>
+                                <td><code>/api/kyc/bvn</code></td>
+                                <td>Verify BVN with NIBSS repository</td>
+                                <td>Bearer JWT</td>
+                                <td><span class="bofa-status-pill bofa-status-success">Active & Live</span></td>
+                            </tr>
+                            <tr>
+                                <td><strong style="color: #059669;">POST</strong></td>
+                                <td><code>/api/kyc/nin</code></td>
+                                <td>Verify NIN with NIMC via NIBSS</td>
+                                <td>Bearer JWT</td>
+                                <td><span class="bofa-status-pill bofa-status-success">Active & Live</span></td>
+                            </tr>
+                            <tr>
+                                <td><strong style="color: #2563EB;">GET</strong></td>
+                                <td><code>/api/kyc/status</code></td>
+                                <td>Retrieve customer KYC verification state</td>
+                                <td>Bearer JWT</td>
+                                <td><span class="bofa-status-pill bofa-status-success">Active & Live</span></td>
+                            </tr>
+                            <tr>
+                                <td><strong style="color: #059669;">POST</strong></td>
+                                <td><code>/api/accounts</code></td>
+                                <td>Open NUBAN account with NIBSS routing</td>
+                                <td>Bearer JWT</td>
+                                <td><span class="bofa-status-pill bofa-status-success">Active & Live</span></td>
+                            </tr>
+                            <tr>
+                                <td><strong style="color: #2563EB;">GET</strong></td>
+                                <td><code>/api/accounts</code></td>
+                                <td>List customer bank accounts</td>
+                                <td>Bearer JWT</td>
+                                <td><span class="bofa-status-pill bofa-status-success">Active & Live</span></td>
+                            </tr>
+                            <tr>
+                                <td><strong style="color: #2563EB;">GET</strong></td>
+                                <td><code>/api/accounts/:accountNumber</code></td>
+                                <td>Retrieve specific customer account</td>
+                                <td>Bearer JWT</td>
+                                <td><span class="bofa-status-pill bofa-status-success">Active & Live</span></td>
+                            </tr>
+                            <tr>
+                                <td><strong style="color: #2563EB;">GET</strong></td>
+                                <td><code>/api/accounts/:accountNumber/balance</code></td>
+                                <td>Retrieve authoritative NIBSS balance</td>
+                                <td>Bearer JWT</td>
+                                <td><span class="bofa-status-pill bofa-status-success">Active & Live</span></td>
+                            </tr>
+                            <tr>
+                                <td><strong style="color: #059669;">POST</strong></td>
+                                <td><code>/api/transactions/transfer</code></td>
+                                <td>Execute interbank settlement via NIBSS</td>
+                                <td>Bearer JWT</td>
+                                <td><span class="bofa-status-pill bofa-status-success">Active & Live</span></td>
+                            </tr>
+                            <tr>
+                                <td><strong style="color: #2563EB;">GET</strong></td>
+                                <td><code>/api/transactions</code></td>
+                                <td>Retrieve customer transaction history</td>
+                                <td>Bearer JWT</td>
+                                <td><span class="bofa-status-pill bofa-status-success">Active & Live</span></td>
+                            </tr>
+                            <tr>
+                                <td><strong style="color: #2563EB;">GET</strong></td>
+                                <td><code>/api/transactions/:transactionId</code></td>
+                                <td>Retrieve specific transaction record</td>
+                                <td>Bearer JWT</td>
+                                <td><span class="bofa-status-pill bofa-status-success">Active & Live</span></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </section>
+
+</main>
+
+<!-- ===================================================================
+     OFFICIAL CSREVOLUS BANK TRANSACTION VOUCHER / RECEIPT MODAL
+     =================================================================== -->
+<div id="receiptModal" class="bofa-modal-overlay" onclick="app.closeReceiptModal(event)">
+    <div class="bofa-receipt-paper" onclick="event.stopPropagation()">
+        <div class="bofa-receipt-header">
+            <div class="bofa-receipt-logo">
+                <div class="csr-logo-emblem" style="width: 28px; height: 28px; border-radius: 6px;">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" style="width: 16px; height: 16px;">
+                        <polygon points="12 2 2 7 12 12 22 7 12 2"></polygon>
+                        <polyline points="2 17 12 22 22 17"></polyline>
+                        <polyline points="2 12 12 17 22 12"></polyline>
+                    </svg>
+                </div>
+                <span class="bofa-receipt-title">CSREVOLUS BANK</span>
+            </div>
+            <div class="bofa-receipt-subtitle">Official NIBSS Electronic Funds Transfer Slip</div>
+            <div class="bofa-receipt-amount-box">
+                <div style="font-size: 0.72rem; text-transform: uppercase; font-weight: 700;">Settled Transfer Amount</div>
+                <div class="bofa-receipt-amount" id="rcptAmount">₦0.00</div>
+            </div>
+        </div>
+
+        <div class="bofa-receipt-body">
+            <div class="bofa-receipt-row">
+                <span class="bofa-receipt-label">Transaction Reference:</span>
+                <span class="bofa-receipt-val" id="rcptRef">TX-00000000</span>
+            </div>
+            <div class="bofa-receipt-row">
+                <span class="bofa-receipt-label">Settlement Status:</span>
+                <span class="bofa-receipt-val" style="color: #059669;" id="rcptStatus">SUCCESSFUL</span>
+            </div>
+            <div class="bofa-receipt-row">
+                <span class="bofa-receipt-label">Date & Timestamp:</span>
+                <span class="bofa-receipt-val" id="rcptDate">--</span>
+            </div>
+            <div class="bofa-receipt-row">
+                <span class="bofa-receipt-label">Debit Account:</span>
+                <span class="bofa-receipt-val" id="rcptFrom">--</span>
+            </div>
+            <div class="bofa-receipt-row">
+                <span class="bofa-receipt-label">Beneficiary Account:</span>
+                <span class="bofa-receipt-val" id="rcptTo">--</span>
+            </div>
+            <div class="bofa-receipt-row">
+                <span class="bofa-receipt-label">NIBSS Settlement Fee:</span>
+                <span class="bofa-receipt-val" style="color: #059669;">₦0.00 (Zero Fee)</span>
+            </div>
+            <div class="bofa-receipt-row" style="border: none;">
+                <span class="bofa-receipt-label">Narration:</span>
+                <span class="bofa-receipt-val" id="rcptRemarks">--</span>
+            </div>
+        </div>
+
+        <div class="bofa-receipt-footer">
+            <button class="bofa-btn bofa-btn-primary" style="flex: 1;" onclick="window.print()">
+                Print Official Slip
+            </button>
+            <button class="bofa-btn bofa-btn-outline" onclick="app.closeReceiptModal()">
+                Close
+            </button>
+        </div>
+    </div>
+</div>
+
+<!-- ===================================================================
+     CREATE ACCOUNT MODAL (WITH COMPREHENSIVE KYC CAPTURE)
+     =================================================================== -->
+<div id="createAccountModal" class="bofa-modal-overlay" onclick="app.closeCreateAccountModal(event)">
+    <div class="bofa-receipt-paper" style="max-width: 480px;" onclick="event.stopPropagation()">
+        <div class="bofa-card-header">
+            <span class="bofa-card-title">Open New Bank Account</span>
+            <button class="bofa-btn-reveal" onclick="app.closeCreateAccountModal()">&times;</button>
+        </div>
+        <div class="bofa-card-body">
+            <p style="font-size: 0.85rem; color: #475569; margin-bottom: 16px;">
+                Each newly provisioned account under CSRevolus Bank is automatically pre-funded with <strong>₦15,000</strong> to enable live interbank transactions.
+            </p>
+
+            <form onsubmit="app.handleCreateAccount(event)">
+                <div class="bofa-form-group">
+                    <label class="bofa-form-label">Account Classification</label>
+                    <select id="newAccountType" class="bofa-form-select">
+                        <option value="savings">Standard Savings Account</option>
+                        <option value="current">Commercial Checking Account</option>
+                    </select>
+                </div>
+
+                <div class="bofa-grid-2" style="gap: 12px; margin-bottom: 0;">
+                    <div class="bofa-form-group">
+                        <label class="bofa-form-label">KYC Type</label>
+                        <select id="newAccountKycType" class="bofa-form-select" onchange="app.onModalKycTypeChange(this.value)">
+                            <option value="bvn">BVN (Bank Verification)</option>
+                            <option value="nin">NIN (National Identity)</option>
+                        </select>
+                    </div>
+                    <div class="bofa-form-group">
+                        <label class="bofa-form-label" id="modalKycIdLabel">11-Digit BVN</label>
+                        <input type="text" id="newAccountKycId" class="bofa-form-input" placeholder="e.g. 10840712848" maxlength="11" inputmode="numeric" required>
+                    </div>
+                </div>
+
+                <div class="bofa-form-group">
+                    <label class="bofa-form-label">Date of Birth</label>
+                    <input type="date" id="newAccountDob" class="bofa-form-input" required>
+                    <div class="bofa-form-hint">Required by NIBSS regulation to validate ownership</div>
+                </div>
+
+                <div id="createAccountKycNotice" style="display: none; margin-bottom: 16px; padding: 12px 14px; border-radius: 8px; background: #FEF3C7; border: 1px solid #F59E0B; color: #92400E; font-size: 0.8rem;">
+                    Please ensure your BVN or NIN has been verified prior to opening an account.
+                </div>
+
+                <div style="display: flex; gap: 8px;">
+                    <button type="submit" id="createAccSubmitBtn" class="bofa-btn bofa-btn-primary" style="flex: 1;">
+                        Confirm & Open Account
+                    </button>
+                    <button type="button" class="bofa-btn bofa-btn-outline" onclick="app.closeCreateAccountModal()">
+                        Cancel
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<!-- PREMIER INSTITUTIONAL FOOTER -->
+<footer class="csr-footer">
+    <div class="csr-footer-inner">
+        <div class="csr-footer-top">
+            <div class="csr-footer-brand">
+                <div class="csr-logo-emblem" style="width: 32px; height: 32px; border-radius: 6px;">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" style="width: 18px; height: 18px;">
+                        <polygon points="12 2 2 7 12 12 22 7 12 2"></polygon>
+                        <polyline points="2 17 12 22 22 17"></polyline>
+                        <polyline points="2 12 12 17 22 12"></polyline>
+                    </svg>
+                </div>
+                <div>
+                    <div style="font-family: var(--csr-font-display); font-weight: 700; color: #FFFFFF; font-size: 1.05rem;">
+                        CSRevolus <span style="color: var(--csr-crimson);">Bank</span>
+                    </div>
+                    <div style="font-size: 0.68rem; color: #94A3B8; text-transform: uppercase; letter-spacing: 0.1em;">
+                        CSR Digital Banking Platform
+                    </div>
+                </div>
+            </div>
+
+            <div class="csr-footer-powered">
+                <span style="color: #94A3B8; font-size: 0.8rem;">Platform Architecture &bull;</span>
+                <a href="https://sophyabraham.com" target="_blank" rel="noopener noreferrer" class="csr-powered-link">
+                    Powered by <span>sophyabraham.com</span>
+                </a>
+            </div>
+        </div>
+
+        <div class="csr-footer-bottom">
+            <div class="csr-footer-copy">
+                &copy; 2026 CSRevolus Bank N.A. &bull; Member NDIC &bull; Simulated NIBSS Clearing & Settlement Layer &bull; Equal Housing Lender
+            </div>
+            <div class="csr-footer-links">
+                <a href="#" class="csr-footer-link" onclick="app.showSection('diagnostics'); return false;">Gateway API</a>
+                <a href="http://localhost:3000/api-docs" target="_blank" rel="noopener noreferrer" class="csr-footer-link">Swagger OpenAPI</a>
+                <a href="https://sophyabraham.com" target="_blank" rel="noopener noreferrer" class="csr-footer-link">Developer Portfolio</a>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<!-- TOAST CONTAINER -->
+<div id="toastContainer" class="bofa-toast-container"></div>
+
+<!-- SCRIPTS -->
+<script src="js/api.js?v=3.1"></script>
+<script src="js/app.js?v=3.1"></script>
+
+</body>
+</html>

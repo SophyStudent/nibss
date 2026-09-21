@@ -1,0 +1,1155 @@
+/* ==========================================================================
+   CSREVOLUS BANK | CSR DIGITAL BANKING PLATFORM
+   High-End Institutional Banking Design System
+   Brand: Deep Midnight Obsidian (#061325) & Wall Street Crimson (#9E1B32 / #800020)
+   ========================================================================== */
+
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@500;700&display=swap');
+
+:root {
+    /* Brand Luxury Palette */
+    --csr-midnight-950: #040A14;
+    --csr-midnight-900: #071324;
+    --csr-midnight-800: #0B1C36;
+    --csr-midnight-700: #10264A;
+    --csr-midnight-600: #193664;
+    
+    /* Wall Street & Mayfair Crimson */
+    --csr-crimson-deep: #6B0818;
+    --csr-crimson: #9E1B32;
+    --csr-crimson-vibrant: #B81D39;
+    --csr-crimson-light: #F8E7EA;
+    --csr-crimson-glow: rgba(158, 27, 50, 0.25);
+    
+    /* Titanium & Obsidian Accents */
+    --csr-gold: #C5A059;
+    --csr-gold-metallic: linear-gradient(135deg, #ECC880 0%, #C5A059 50%, #94712F 100%);
+    --csr-emerald: #0D9488;
+    --csr-emerald-soft: #F0FDF4;
+    
+    /* Refined Neutral Surfaces */
+    --csr-bg: #F8FAFC;
+    --csr-card-bg: #FFFFFF;
+    --csr-text-main: #0F172A;
+    --csr-text-muted: #64748B;
+    --csr-text-subtle: #94A3B8;
+    --csr-border: #E2E8F0;
+    --csr-border-subtle: rgba(226, 232, 240, 0.8);
+    
+    /* Depth & Shadows */
+    --csr-shadow-sm: 0 1px 3px rgba(7, 19, 36, 0.04), 0 1px 2px rgba(7, 19, 36, 0.02);
+    --csr-shadow-md: 0 10px 25px -5px rgba(7, 19, 36, 0.06), 0 8px 10px -6px rgba(7, 19, 36, 0.03);
+    --csr-shadow-xl: 0 25px 50px -12px rgba(7, 19, 36, 0.12), 0 0 1px rgba(7, 19, 36, 0.15);
+    --csr-card-shadow: 0 12px 32px rgba(4, 10, 20, 0.05), 0 1px 3px rgba(4, 10, 20, 0.03);
+    
+    --csr-font: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    --csr-font-display: 'Space Grotesk', var(--csr-font);
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+    font-family: var(--csr-font);
+    background: #F4F6F9;
+    color: var(--csr-text-main);
+    line-height: 1.55;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+/* ==========================================================================
+   EXECUTIVE PRE-HEADER (SECURITY & COMPLIANCE)
+   ========================================================================== */
+.bofa-security-bar {
+    background-color: var(--csr-midnight-950);
+    color: #94A3B8;
+    font-size: 0.72rem;
+    padding: 7px 32px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+    letter-spacing: 0.03em;
+}
+
+.bofa-security-items {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.bofa-security-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    font-weight: 500;
+}
+
+.bofa-security-badge svg {
+    width: 13px;
+    height: 13px;
+    color: var(--csr-gold);
+}
+
+.bofa-status-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background-color: #10B981;
+    display: inline-block;
+    box-shadow: 0 0 10px #10B981;
+}
+
+.bofa-security-actions {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+}
+
+.bofa-security-link {
+    color: #94A3B8;
+    text-decoration: none;
+    font-weight: 500;
+    transition: color 0.15s ease;
+    cursor: pointer;
+}
+
+.bofa-security-link:hover {
+    color: #FFFFFF;
+    text-decoration: none;
+}
+
+/* ==========================================================================
+   PRIMARY INSTITUTIONAL HEADER
+   ========================================================================== */
+.bofa-header {
+    background: linear-gradient(180deg, var(--csr-midnight-900) 0%, var(--csr-midnight-950) 100%);
+    color: #FFFFFF;
+    padding: 0 32px;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+}
+
+.bofa-header-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 18px 0 14px;
+}
+
+.bofa-brand {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    text-decoration: none;
+    color: inherit;
+}
+
+/* Bespoke Minimalist Vector Logo */
+.csr-logo-emblem {
+    width: 38px;
+    height: 38px;
+    background: linear-gradient(135deg, var(--csr-crimson) 0%, var(--csr-crimson-deep) 100%);
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 14px rgba(158, 27, 50, 0.4), inset 0 1px 1px rgba(255, 255, 255, 0.3);
+    position: relative;
+    overflow: hidden;
+}
+
+.csr-logo-emblem::after {
+    content: "";
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: linear-gradient(45deg, transparent 40%, rgba(255, 255, 255, 0.15) 50%, transparent 60%);
+    pointer-events: none;
+}
+
+.csr-logo-emblem svg {
+    width: 22px;
+    height: 22px;
+    color: #FFFFFF;
+}
+
+.bofa-brand-text {
+    display: flex;
+    flex-direction: column;
+}
+
+.bofa-brand-title {
+    font-family: var(--csr-font-display);
+    font-size: 1.35rem;
+    font-weight: 700;
+    letter-spacing: -0.01em;
+    color: #FFFFFF;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.bofa-brand-title span {
+    color: var(--csr-crimson);
+    font-weight: 800;
+}
+
+.csr-badge-tag {
+    font-family: var(--csr-font);
+    font-size: 0.62rem;
+    letter-spacing: 0.1em;
+    font-weight: 700;
+    text-transform: uppercase;
+    background: rgba(197, 160, 89, 0.15);
+    color: var(--csr-gold);
+    border: 1px solid rgba(197, 160, 89, 0.35);
+    padding: 1px 6px;
+    border-radius: 3px;
+    margin-left: 4px;
+}
+
+.bofa-brand-subtitle {
+    font-size: 0.68rem;
+    text-transform: uppercase;
+    letter-spacing: 0.14em;
+    color: #94A3B8;
+    font-weight: 600;
+    margin-top: -1px;
+}
+
+.bofa-header-user {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+}
+
+.bofa-user-badge {
+    text-align: right;
+}
+
+.bofa-user-name {
+    font-size: 0.88rem;
+    font-weight: 600;
+    color: #FFFFFF;
+}
+
+.bofa-user-email {
+    font-size: 0.72rem;
+    color: #94A3B8;
+}
+
+.bofa-btn-signout {
+    background: rgba(255, 255, 255, 0.06);
+    color: #E2E8F0;
+    border: 1px solid rgba(255, 255, 255, 0.14);
+    padding: 7px 16px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.bofa-btn-signout:hover {
+    background: var(--csr-crimson);
+    color: #FFFFFF;
+    border-color: var(--csr-crimson);
+    box-shadow: 0 4px 12px rgba(158, 27, 50, 0.3);
+}
+
+/* ==========================================================================
+   NAVIGATION BAR (SLEEK PILL & GLOW STYLING)
+   ========================================================================== */
+.bofa-nav-bar {
+    display: flex;
+    gap: 6px;
+    overflow-x: auto;
+    padding: 4px 0 0;
+}
+
+.bofa-nav-item {
+    padding: 11px 18px;
+    color: #94A3B8;
+    font-size: 0.85rem;
+    font-weight: 500;
+    text-decoration: none;
+    cursor: pointer;
+    border-bottom: 2px solid transparent;
+    transition: all 0.2s ease;
+    white-space: nowrap;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    border-radius: 6px 6px 0 0;
+}
+
+.bofa-nav-item:hover {
+    color: #FFFFFF;
+    background-color: rgba(255, 255, 255, 0.04);
+}
+
+.bofa-nav-item.active {
+    color: #FFFFFF;
+    font-weight: 600;
+    border-bottom: 2px solid var(--csr-crimson);
+    background: linear-gradient(180deg, rgba(158, 27, 50, 0.08) 0%, rgba(158, 27, 50, 0.18) 100%);
+}
+
+.bofa-nav-item svg {
+    width: 16px;
+    height: 16px;
+    stroke-width: 2.2;
+}
+
+/* Crimson Ribbon Accent Under Nav */
+.bofa-accent-strip {
+    height: 2px;
+    background: linear-gradient(90deg, var(--csr-crimson) 0%, #E31837 35%, var(--csr-midnight-900) 100%);
+}
+
+/* ==========================================================================
+   MAIN CONTENT AREA
+   ========================================================================== */
+.bofa-main {
+    max-width: 1240px;
+    width: 100%;
+    margin: 0 auto;
+    padding: 32px 24px 80px;
+    flex: 1;
+}
+
+.bofa-section {
+    display: none;
+    animation: csrFadeSlide 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.bofa-section.active {
+    display: block;
+}
+
+@keyframes csrFadeSlide {
+    from {
+        opacity: 0;
+        transform: translateY(8px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* ==========================================================================
+   PREMIUM CARDS & PANELS
+   ========================================================================== */
+.bofa-card {
+    background-color: var(--csr-card-bg);
+    border: 1px solid var(--csr-border);
+    border-radius: 12px;
+    box-shadow: var(--csr-card-shadow);
+    overflow: hidden;
+    margin-bottom: 24px;
+    transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+}
+
+.bofa-card:hover {
+    box-shadow: 0 16px 36px -8px rgba(7, 19, 36, 0.08);
+    border-color: #CBD5E1;
+}
+
+.bofa-card-header {
+    padding: 20px 28px;
+    border-bottom: 1px solid var(--csr-border);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: #FFFFFF;
+}
+
+.bofa-card-title {
+    font-size: 1.05rem;
+    font-weight: 700;
+    color: var(--csr-midnight-950);
+    letter-spacing: -0.01em;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.bofa-card-body {
+    padding: 28px;
+}
+
+.bofa-grid-2 {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 28px;
+}
+
+.bofa-grid-3 {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+}
+
+/* ==========================================================================
+   HIGH-NET-WORTH EXECUTIVE HERO BANNER
+   ========================================================================== */
+.bofa-hero-banner {
+    background: radial-gradient(circle at top right, #132A4F 0%, var(--csr-midnight-900) 60%, var(--csr-midnight-950) 100%);
+    color: #FFFFFF;
+    border-radius: 16px;
+    padding: 36px 40px;
+    margin-bottom: 32px;
+    box-shadow: 0 20px 45px -10px rgba(4, 10, 20, 0.4);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    position: relative;
+    overflow: hidden;
+}
+
+.bofa-hero-banner::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 320px;
+    height: 100%;
+    background: radial-gradient(circle, rgba(158, 27, 50, 0.22) 0%, transparent 70%);
+    pointer-events: none;
+}
+
+.bofa-hero-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: relative;
+    z-index: 2;
+}
+
+.bofa-hero-greeting {
+    font-size: 0.76rem;
+    text-transform: uppercase;
+    letter-spacing: 0.14em;
+    color: #94A3B8;
+    font-weight: 700;
+    margin-bottom: 4px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.bofa-hero-heading {
+    font-size: 1.85rem;
+    font-weight: 800;
+    letter-spacing: -0.02em;
+    color: #FFFFFF;
+}
+
+.bofa-total-balance {
+    margin-top: 18px;
+}
+
+.bofa-total-label {
+    font-size: 0.78rem;
+    color: #94A3B8;
+    font-weight: 500;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+}
+
+.bofa-total-amount {
+    font-family: var(--csr-font-display);
+    font-size: 2.8rem;
+    font-weight: 800;
+    letter-spacing: -0.03em;
+    display: flex;
+    align-items: baseline;
+    gap: 8px;
+    color: #FFFFFF;
+    margin-top: 2px;
+}
+
+.bofa-currency {
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: var(--csr-gold);
+}
+
+.bofa-hero-actions {
+    display: flex;
+    gap: 14px;
+}
+
+/* ==========================================================================
+   OBSIDIAN & CRIMSON DIGITAL CARD (BESPOKE EMV FINTECH CARD)
+   ========================================================================== */
+.bofa-card-wrapper {
+    perspective: 1200px;
+    max-width: 400px;
+    width: 100%;
+}
+
+.bofa-digital-card {
+    background: linear-gradient(135deg, #091830 0%, #040A15 65%, #180509 100%);
+    border-radius: 18px;
+    padding: 26px 28px;
+    color: #FFFFFF;
+    box-shadow: 0 18px 40px -10px rgba(0, 0, 0, 0.45), 0 0 0 1px rgba(255, 255, 255, 0.12) inset;
+    position: relative;
+    overflow: hidden;
+    height: 236px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.3s ease;
+}
+
+.bofa-digital-card:hover {
+    transform: translateY(-5px) rotateX(2deg);
+    box-shadow: 0 24px 50px -12px rgba(158, 27, 50, 0.35), 0 0 0 1px rgba(255, 255, 255, 0.2) inset;
+}
+
+.bofa-digital-card::before {
+    content: "";
+    position: absolute;
+    top: -50%;
+    right: -20%;
+    width: 260px;
+    height: 260px;
+    background: radial-gradient(circle, rgba(158, 27, 50, 0.35) 0%, transparent 70%);
+    pointer-events: none;
+}
+
+.bofa-digital-card::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, var(--csr-crimson) 0%, var(--csr-gold) 100%);
+}
+
+.bofa-card-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.bofa-card-bank-name {
+    font-family: var(--csr-font-display);
+    font-size: 0.95rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    color: #FFFFFF;
+}
+
+.bofa-card-tier {
+    font-size: 0.62rem;
+    background: rgba(197, 160, 89, 0.15);
+    color: var(--csr-gold);
+    border: 1px solid rgba(197, 160, 89, 0.4);
+    padding: 3px 9px;
+    border-radius: 20px;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+}
+
+.bofa-card-middle {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin: 6px 0;
+}
+
+/* Realistic Brushed Gold EMV Chip */
+.bofa-emv-chip {
+    width: 46px;
+    height: 34px;
+    background: linear-gradient(135deg, #E2BF7D 0%, #F5DEB3 30%, #C5A059 70%, #8A6827 100%);
+    border-radius: 6px;
+    border: 1px solid #75551A;
+    position: relative;
+    box-shadow: inset 0 1px 3px rgba(255, 255, 255, 0.6), 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.bofa-emv-chip::before {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: rgba(0, 0, 0, 0.3);
+}
+
+.bofa-emv-chip::after {
+    content: "";
+    position: absolute;
+    left: 45%;
+    top: 0;
+    bottom: 0;
+    width: 1px;
+    background: rgba(0, 0, 0, 0.3);
+}
+
+.bofa-contactless-icon {
+    width: 22px;
+    height: 22px;
+    color: #CBD5E1;
+    opacity: 0.8;
+}
+
+.bofa-card-number-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.bofa-card-number {
+    font-family: 'Space Grotesk', "Courier New", Courier, monospace;
+    font-size: 1.25rem;
+    letter-spacing: 0.18em;
+    font-weight: 600;
+    color: #FFFFFF;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.7);
+}
+
+.bofa-btn-reveal {
+    background: rgba(255, 255, 255, 0.08);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    color: #CBD5E1;
+    cursor: pointer;
+    padding: 6px 8px;
+    border-radius: 6px;
+    transition: all 0.2s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.bofa-btn-reveal:hover {
+    background: rgba(255, 255, 255, 0.18);
+    color: #FFFFFF;
+}
+
+.bofa-card-bottom {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+}
+
+.bofa-card-holder-label,
+.bofa-card-expiry-label {
+    font-size: 0.58rem;
+    color: #94A3B8;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    font-weight: 600;
+}
+
+.bofa-card-holder-name,
+.bofa-card-expiry {
+    font-size: 0.88rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: #FFFFFF;
+}
+
+/* ==========================================================================
+   BUTTONS & ACTIONS
+   ========================================================================== */
+.bofa-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 11px 22px;
+    font-size: 0.88rem;
+    font-weight: 600;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+    text-decoration: none;
+    border: 1px solid transparent;
+    font-family: inherit;
+}
+
+.bofa-btn-primary {
+    background: linear-gradient(180deg, var(--csr-crimson) 0%, var(--csr-crimson-deep) 100%);
+    color: #FFFFFF;
+    border-color: rgba(255, 255, 255, 0.12);
+    box-shadow: 0 4px 14px rgba(158, 27, 50, 0.35);
+}
+
+.bofa-btn-primary:hover {
+    background: linear-gradient(180deg, var(--csr-crimson-vibrant) 0%, var(--csr-crimson) 100%);
+    box-shadow: 0 6px 20px rgba(158, 27, 50, 0.45);
+    transform: translateY(-1px);
+}
+
+.bofa-btn-secondary {
+    background: rgba(255, 255, 255, 0.08);
+    color: #FFFFFF;
+    border: 1px solid rgba(255, 255, 255, 0.18);
+}
+
+.bofa-btn-secondary:hover {
+    background: rgba(255, 255, 255, 0.15);
+    border-color: rgba(255, 255, 255, 0.28);
+    transform: translateY(-1px);
+}
+
+.bofa-btn-outline {
+    background-color: transparent;
+    color: var(--csr-midnight-950);
+    border-color: var(--csr-border);
+}
+
+.bofa-btn-outline:hover {
+    background-color: #F1F5F9;
+    border-color: #CBD5E1;
+}
+
+.bofa-btn-sm {
+    padding: 7px 14px;
+    font-size: 0.8rem;
+}
+
+/* ==========================================================================
+   FORM CONTROLS
+   ========================================================================== */
+.bofa-form-group {
+    margin-bottom: 22px;
+}
+
+.bofa-form-label {
+    display: block;
+    font-size: 0.82rem;
+    font-weight: 600;
+    color: var(--csr-text-main);
+    margin-bottom: 7px;
+    letter-spacing: -0.01em;
+}
+
+.bofa-form-input,
+.bofa-form-select {
+    width: 100%;
+    padding: 12px 16px;
+    font-size: 0.92rem;
+    border: 1px solid var(--csr-border);
+    border-radius: 8px;
+    background-color: #FFFFFF;
+    color: var(--csr-text-main);
+    transition: all 0.2s ease;
+    font-family: inherit;
+}
+
+.bofa-form-input:focus,
+.bofa-form-select:focus {
+    outline: none;
+    border-color: var(--csr-crimson);
+    box-shadow: 0 0 0 3px rgba(158, 27, 50, 0.12);
+}
+
+.bofa-form-hint {
+    font-size: 0.74rem;
+    color: var(--csr-text-muted);
+    margin-top: 5px;
+}
+
+.bofa-amount-chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 10px;
+}
+
+.bofa-chip {
+    background: #F8FAFC;
+    color: var(--csr-midnight-900);
+    border: 1px solid var(--csr-border);
+    padding: 6px 14px;
+    border-radius: 20px;
+    font-size: 0.82rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.15s ease;
+}
+
+.bofa-chip:hover {
+    background: var(--csr-crimson-light);
+    color: var(--csr-crimson);
+    border-color: var(--csr-crimson);
+}
+
+.bofa-name-enquiry-badge {
+    margin-top: 10px;
+    padding: 12px 16px;
+    border-radius: 8px;
+    background-color: #F8FAFC;
+    border: 1px solid var(--csr-border);
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-size: 0.85rem;
+}
+
+.bofa-name-enquiry-badge.success {
+    background-color: var(--csr-emerald-soft);
+    border-color: #A7F3D0;
+    color: #065F46;
+}
+
+.bofa-name-enquiry-badge.loading {
+    background-color: #F8FAFC;
+    border-color: var(--csr-border);
+    color: var(--csr-text-muted);
+}
+
+/* ==========================================================================
+   TRANSACTIONS TABLE & LEDGER
+   ========================================================================== */
+.bofa-table-wrapper {
+    overflow-x: auto;
+}
+
+.bofa-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.88rem;
+    text-align: left;
+}
+
+.bofa-table th {
+    background-color: #FAFBFD;
+    color: var(--csr-text-muted);
+    font-weight: 700;
+    font-size: 0.72rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    padding: 14px 20px;
+    border-bottom: 1px solid var(--csr-border);
+}
+
+.bofa-table td {
+    padding: 16px 20px;
+    border-bottom: 1px solid #F1F5F9;
+    vertical-align: middle;
+}
+
+.bofa-table tr:hover td {
+    background-color: #F8FAFC;
+}
+
+.bofa-status-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    padding: 3px 9px;
+    border-radius: 20px;
+    font-size: 0.72rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+}
+
+.bofa-status-success {
+    background-color: #ECFDF5;
+    color: #059669;
+    border: 1px solid #A7F3D0;
+}
+
+.bofa-status-pending {
+    background-color: #FFFBEB;
+    color: #B45309;
+    border: 1px solid #FDE68A;
+}
+
+/* ==========================================================================
+   OFFICIAL TRANSACTION RECEIPT (EXECUTIVE PRINTABLE SLIP)
+   ========================================================================== */
+.bofa-modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(4, 10, 20, 0.75);
+    display: none;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+    padding: 24px;
+    backdrop-filter: blur(5px);
+}
+
+.bofa-modal-overlay.active {
+    display: flex;
+}
+
+.bofa-receipt-paper {
+    background-color: #FFFFFF;
+    max-width: 490px;
+    width: 100%;
+    border-radius: 16px;
+    box-shadow: 0 30px 60px -15px rgba(0, 0, 0, 0.35);
+    overflow: hidden;
+    position: relative;
+    border-top: 5px solid var(--csr-crimson);
+}
+
+.bofa-receipt-header {
+    background: linear-gradient(180deg, #FAFBFD 0%, #FFFFFF 100%);
+    padding: 28px 32px;
+    text-align: center;
+    border-bottom: 1px dashed #CBD5E1;
+}
+
+.bofa-receipt-logo {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 8px;
+}
+
+.bofa-receipt-title {
+    font-family: var(--csr-font-display);
+    font-size: 1.25rem;
+    font-weight: 800;
+    color: var(--csr-midnight-950);
+}
+
+.bofa-receipt-subtitle {
+    font-size: 0.72rem;
+    color: var(--csr-text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    font-weight: 600;
+}
+
+.bofa-receipt-amount-box {
+    margin-top: 16px;
+    padding: 14px;
+    background-color: #F0FDF4;
+    border: 1px solid #BBF7D0;
+    border-radius: 8px;
+    color: #166534;
+}
+
+.bofa-receipt-amount {
+    font-family: var(--csr-font-display);
+    font-size: 2rem;
+    font-weight: 800;
+    letter-spacing: -0.02em;
+}
+
+.bofa-receipt-body {
+    padding: 24px 32px;
+}
+
+.bofa-receipt-row {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px 0;
+    font-size: 0.85rem;
+    border-bottom: 1px solid #F1F5F9;
+}
+
+.bofa-receipt-label {
+    color: var(--csr-text-muted);
+}
+
+.bofa-receipt-val {
+    font-weight: 600;
+    color: var(--csr-text-main);
+    text-align: right;
+}
+
+.bofa-receipt-footer {
+    padding: 20px 32px;
+    background-color: #F8FAFC;
+    border-top: 1px solid var(--csr-border);
+    display: flex;
+    gap: 12px;
+}
+
+/* ==========================================================================
+   TOAST NOTIFICATIONS
+   ========================================================================== */
+.bofa-toast-container {
+    position: fixed;
+    bottom: 28px;
+    right: 28px;
+    z-index: 2000;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    max-width: 400px;
+}
+
+.bofa-toast {
+    background-color: var(--csr-midnight-950);
+    color: #FFFFFF;
+    padding: 14px 18px;
+    border-radius: 10px;
+    box-shadow: 0 16px 36px rgba(0, 0, 0, 0.25);
+    font-size: 0.88rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    animation: csrToastIn 0.25s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    border-left: 4px solid var(--csr-crimson);
+}
+
+.bofa-toast.success {
+    border-left-color: #10B981;
+}
+
+.bofa-toast.warning {
+    border-left-color: #F59E0B;
+}
+
+@keyframes csrToastIn {
+    from {
+        transform: translateX(100%);
+        opacity: 0;
+    }
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+/* ==========================================================================
+   PREMIER INSTITUTIONAL FOOTER
+   ========================================================================== */
+.csr-footer {
+    background: linear-gradient(180deg, var(--csr-midnight-950) 0%, #02060D 100%);
+    color: #94A3B8;
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
+    padding: 36px 32px 28px;
+    margin-top: auto;
+    font-size: 0.8rem;
+}
+
+.csr-footer-inner {
+    max-width: 1240px;
+    margin: 0 auto;
+    width: 100%;
+}
+
+.csr-footer-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-bottom: 24px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+    flex-wrap: wrap;
+    gap: 16px;
+}
+
+.csr-footer-brand {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.csr-footer-powered {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    padding: 8px 16px;
+    border-radius: 30px;
+    transition: all 0.2s ease;
+}
+
+.csr-footer-powered:hover {
+    border-color: rgba(158, 27, 50, 0.4);
+    background: rgba(158, 27, 50, 0.08);
+}
+
+.csr-powered-link {
+    color: #E2E8F0;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 0.82rem;
+    transition: color 0.15s ease;
+}
+
+.csr-powered-link span {
+    color: #ECC880;
+    font-weight: 700;
+}
+
+.csr-powered-link:hover span {
+    color: #FFFFFF;
+    text-decoration: underline;
+}
+
+.csr-footer-bottom {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: 20px;
+    flex-wrap: wrap;
+    gap: 14px;
+    font-size: 0.74rem;
+    color: #64748B;
+}
+
+.csr-footer-links {
+    display: flex;
+    gap: 18px;
+}
+
+.csr-footer-link {
+    color: #94A3B8;
+    text-decoration: none;
+    transition: color 0.15s ease;
+}
+
+.csr-footer-link:hover {
+    color: #FFFFFF;
+    text-decoration: underline;
+}
+
+/* Responsive */
+@media (max-width: 900px) {
+    .bofa-grid-2,
+    .bofa-grid-3 {
+        grid-template-columns: 1fr;
+    }
+
+    .bofa-hero-content {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 24px;
+    }
+}
+
+@media (max-width: 600px) {
+    .bofa-security-bar,
+    .bofa-header-top {
+        padding: 12px 18px;
+    }
+    .bofa-main {
+        padding: 20px 14px 60px;
+    }
+}
